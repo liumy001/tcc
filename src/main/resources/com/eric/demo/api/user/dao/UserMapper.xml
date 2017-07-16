@@ -10,6 +10,7 @@
     <result column="last_modified_by" property="lastModifiedBy" jdbcType="VARCHAR" />
     <result column="last_modified_date" property="lastModifiedDate" jdbcType="DATE" />
   </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
