@@ -55,7 +55,7 @@ public class RedisConfig {
 
     @Bean(name="redisClient")
     public RedisClientTemplate getRedisClientTemplate(){
-        LOGGER.info("JedisPool注入成功！！");
+        LOGGER.info("JedisPool init sucess！！");
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxTotal(maxTotal);
