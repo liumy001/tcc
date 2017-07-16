@@ -20,8 +20,7 @@ import java.util.List;
  * Created by liumy on 2017/7/16.
  */
 @Configuration
-@PropertySource("classpath:redis/redis-dev.properties")
-@Profile("dev")
+@PropertySource("classpath:redis/redis-${spring.profiles.active}.properties")
 public class RedisConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisConfig.class);
