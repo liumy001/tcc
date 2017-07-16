@@ -4,10 +4,7 @@ import com.eric.demo.commons.util.RedisClientTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
@@ -20,11 +17,11 @@ import java.util.List;
  * Created by liumy on 2017/7/16.
  */
 @Configuration
-@PropertySource("classpath:redis/redis-dev.properties")
-@Profile("dev")
-public class RedisConfig {
+@PropertySource("classpath:redis/redis-prod.properties")
+@Profile("prod")
+public class RedisProdConfig {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RedisConfig.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisProdConfig.class);
 
     @Bean
     public ConfigureRedisAction configureRedisAction() {
