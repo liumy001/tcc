@@ -24,5 +24,13 @@ public class Test {
 		user.setPassword("1234567");
 		System.out.println(userService.save(user));
 	}
+
+
+	@org.junit.Test
+	public void test1(){
+
+
+
+	}
 }
 
