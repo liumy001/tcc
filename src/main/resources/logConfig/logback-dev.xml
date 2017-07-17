@@ -138,7 +138,7 @@
         <queueSize>512</queueSize>
         <appender-ref ref="FILE_ERROR"/>
     </appender>
-    <root level="DEBUG">
+    <root level="info">
         <!-- appender referenced after it is defined -->
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ASYNC_LOG"/>
