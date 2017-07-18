@@ -29,7 +29,7 @@ public class Test {
 
     @org.junit.Test
     public void test1() throws Exception{
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 500; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {

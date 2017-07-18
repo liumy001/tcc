@@ -33,6 +33,7 @@ public class ViewResolverConfig implements ErrorViewResolver {
 
     @Override
     public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status, Map<String, Object> model) {
+
         switch (status) {
             case NOT_FOUND:
                 return new ModelAndView("error/404");
