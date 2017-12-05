@@ -21,7 +21,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * <PRE>
  * <BR>	修改记录
  * <BR>-----------------------------------------------
- * <BR>	修改日期			修改�?			修改内容
+ * <BR>	修改日期			修改�?			修改内容
  * </PRE>
  *
  * @author wurt2
@@ -52,10 +52,10 @@ public class ExecutorConfig {
         executor.setCorePoolSize(corePoolSize);
         executor.setMaxPoolSize(maxPoolSize);
         // 采用默认队列大小
-        // executor.setQueueCapacity(queueCapacity);
+        executor.setQueueCapacity(queueCapacity);
         executor.setThreadNamePrefix(ThreadNamePrefix);
-        // rejection-policy：当pool已经达到max size的时候，如何处理新任�?
-        // CALLER_RUNS：不在新线程中执行任务，而是有调用�?�所在的线程来执�?
+        // rejection-policy：当pool已经达到max size的时候，如何处理新任�?
+        // CALLER_RUNS：不在新线程中执行任务，而是有调用�?�所在的线程来执�?
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.initialize();
         return executor;
