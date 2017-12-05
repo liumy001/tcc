@@ -22,10 +22,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * <PRE>
  * <BR>	修改记录
  * <BR>-----------------------------------------------
- * <BR>	修改日期			修改�?			修改内容
+ * <BR>	修改日期			修改�?			修改内容
  * </PRE>
  *
- * @author wurt2
  * @version 1.0
  * @since 1.0
  */
