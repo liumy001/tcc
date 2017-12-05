@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.eric.demo.api.user.domain.User" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
-    <result column="created_date" property="createdDate" jdbcType="DATE" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
     <result column="last_modified_by" property="lastModifiedBy" jdbcType="VARCHAR" />
-    <result column="last_modified_date" property="lastModifiedDate" jdbcType="DATE" />
+    <result column="last_modified_date" property="lastModifiedDate" jdbcType="TIMESTAMP" />
   </resultMap>
-
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, created_by, created_date, last_modified_by, last_modified_date
+    id, username, nickname, password, created_by, created_date, last_modified_by, last_modified_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eric.demo.api.user.domain.UserCriteria" >
     select
@@ -103,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eric.demo.api.user.domain.User" >
-    insert into t_user (id, username, password, 
-      created_by, created_date, last_modified_by, 
-      last_modified_date)
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=DATE}, #{lastModifiedBy,jdbcType=VARCHAR}, 
-      #{lastModifiedDate,jdbcType=DATE})
+    insert into t_user (id, username, nickname, 
+      password, created_by, created_date, 
+      last_modified_by, last_modified_date)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.eric.demo.api.user.domain.User" >
     insert into t_user
@@ -118,6 +118,9 @@
       </if>
       <if test="username != null" >
         username,
+      </if>
+      <if test="nickname != null" >
+        nickname,
       </if>
       <if test="password != null" >
         password,
@@ -142,6 +145,9 @@
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
@@ -149,13 +155,13 @@
         #{createdBy,jdbcType=VARCHAR},
       </if>
       <if test="createdDate != null" >
-        #{createdDate,jdbcType=DATE},
+        #{createdDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastModifiedBy != null" >
         #{lastModifiedBy,jdbcType=VARCHAR},
       </if>
       <if test="lastModifiedDate != null" >
-        #{lastModifiedDate,jdbcType=DATE},
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -174,6 +180,9 @@
       <if test="record.username != null" >
         username = #{record.username,jdbcType=VARCHAR},
       </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
@@ -181,13 +190,13 @@
         created_by = #{record.createdBy,jdbcType=VARCHAR},
       </if>
       <if test="record.createdDate != null" >
-        created_date = #{record.createdDate,jdbcType=DATE},
+        created_date = #{record.createdDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.lastModifiedBy != null" >
         last_modified_by = #{record.lastModifiedBy,jdbcType=VARCHAR},
       </if>
       <if test="record.lastModifiedDate != null" >
-        last_modified_date = #{record.lastModifiedDate,jdbcType=DATE},
+        last_modified_date = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -198,11 +207,12 @@
     update t_user
     set id = #{record.id,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       created_by = #{record.createdBy,jdbcType=VARCHAR},
-      created_date = #{record.createdDate,jdbcType=DATE},
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
       last_modified_by = #{record.lastModifiedBy,jdbcType=VARCHAR},
-      last_modified_date = #{record.lastModifiedDate,jdbcType=DATE}
+      last_modified_date = #{record.lastModifiedDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +223,9 @@
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},
       </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
@@ -220,13 +233,13 @@
         created_by = #{createdBy,jdbcType=VARCHAR},
       </if>
       <if test="createdDate != null" >
-        created_date = #{createdDate,jdbcType=DATE},
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastModifiedBy != null" >
         last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
       </if>
       <if test="lastModifiedDate != null" >
-        last_modified_date = #{lastModifiedDate,jdbcType=DATE},
+        last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -234,11 +247,12 @@
   <update id="updateByPrimaryKey" parameterType="com.eric.demo.api.user.domain.User" >
     update t_user
     set username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       created_by = #{createdBy,jdbcType=VARCHAR},
-      created_date = #{createdDate,jdbcType=DATE},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
       last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
-      last_modified_date = #{lastModifiedDate,jdbcType=DATE}
+      last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="com.eric.demo.api.user.domain.UserCriteria" id="selectByExampleWithRowbounds" >
