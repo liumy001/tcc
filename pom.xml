@@ -26,6 +26,7 @@
         <!-- mybatis pagehelper -->
         <pagehelper.version>3.6.4</pagehelper.version>
         <xbean.reflect.version>3.7</xbean.reflect.version>
+        <pagehelper.version>4.1.6</pagehelper.version>
     </properties>
 
 
@@ -255,6 +256,11 @@
             <groupId>org.apache.xbean</groupId>
             <artifactId>xbean-reflect</artifactId>
             <version>${xbean.reflect.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
         </dependency>
     </dependencies>
 
