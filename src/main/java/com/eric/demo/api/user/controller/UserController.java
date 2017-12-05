@@ -33,7 +33,7 @@ public class UserController {
 	/**
 	 * GET /users -> get all the users
 	 */
-	@RequestMapping(value = "/users",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users", method = {RequestMethod.POST,RequestMethod.GET})
 	public ResponseEntity<List<User>> getAll() {
 		log.info("REST request to get all Users");
 		return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
@@ -42,7 +42,7 @@ public class UserController {
 	/**
 	 * GET /users/:username -> get the "username" user
 	 */
-	@RequestMapping(value = "/users/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users/{username}", method = RequestMethod.GET)
 	public User getUser(@PathVariable String username,
 			HttpServletResponse response) {
 		log.debug("REST request to get User : {}", username);
@@ -56,7 +56,7 @@ public class UserController {
 	/**
 	 * POST /users -> create a new user
 	 */
-	@RequestMapping(value = "/users", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	public ResponseEntity<?> create(@Valid @RequestBody User userDto,
 			HttpServletRequest request) {
 		User user = userService.findOneByUsername(userDto.getUsername());
@@ -72,7 +72,7 @@ public class UserController {
 	/**
 	 * POST /users/change_password -> changes the current user's password
 	 */
-	@RequestMapping(value = "/users/change_password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users/change_password", method = RequestMethod.POST)
 	public ResponseEntity<String> changePassword(@RequestBody String password) {
 		if (password.isEmpty() || password.length() < 5
 				|| password.length() > 50) {
