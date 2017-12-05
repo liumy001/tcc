@@ -70,5 +70,7 @@
 		<!-- 配置表信息 -->
 		<table schema="Boot" tableName="t_role" domainObjectName="Role" />
 
+
+		<!--mybatis-generator:generate-->
 	</context>
 </generatorConfiguration>  
