@@ -68,7 +68,7 @@
 		</javaClientGenerator>
 
 		<!-- 配置表信息 -->
-		<table schema="Boot" tableName="t_role" domainObjectName="Role" />
+		<table schema="Boot" tableName="t_user" domainObjectName="User" />
 
 
 		<!--mybatis-generator:generate-->
