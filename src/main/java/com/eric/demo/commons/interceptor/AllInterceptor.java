@@ -27,7 +27,6 @@ public class AllInterceptor extends HandlerInterceptorAdapter {
         String[] urlSplit = urls.split(",");
         for (int i = 0; i < urlSplit.length; i++) {
             String matchString = urlSplit[i];
-            LOGGER.info("url:"+matchString);
             if (url.matches(".*" + matchString + ".*")) {
                 return super.preHandle(request, response, handler);
             }

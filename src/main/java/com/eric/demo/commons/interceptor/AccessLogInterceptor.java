@@ -8,8 +8,10 @@
  */
 package com.eric.demo.commons.interceptor;
 
+import com.eric.demo.commons.util.RedisClientTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -37,14 +39,13 @@ public class AccessLogInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        LOGGER.info("请求开始：");
         return super.preHandle(request, response, handler);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        LOGGER.info("请求结束：");
         super.afterCompletion(request, response, handler, ex);
     }
+
+
 }
