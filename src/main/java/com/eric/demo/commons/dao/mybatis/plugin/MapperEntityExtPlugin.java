@@ -5,6 +5,8 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MapperEntityExtPlugin extends PluginAdapter {
@@ -27,6 +29,11 @@ public class MapperEntityExtPlugin extends PluginAdapter {
         FullyQualifiedJavaType imp = new FullyQualifiedJavaType("com.eric.demo.commons.domain.AbstractAuditingEntity");
         topLevelClass.addImportedType(imp);
         topLevelClass.setSuperClass(fqjt);
+        topLevelClass.addJavaDocLine("/**");
+        topLevelClass.addJavaDocLine(" * @数表名称 " + introspectedTable.getFullyQualifiedTable());
+        topLevelClass.addJavaDocLine(" * @开发日期 " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        topLevelClass.addJavaDocLine(" * @开发作者 by:liumy ");
+        topLevelClass.addJavaDocLine(" */");
         return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
     }
 

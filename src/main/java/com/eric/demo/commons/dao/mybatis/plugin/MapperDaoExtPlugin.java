@@ -6,6 +6,8 @@ import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MapperDaoExtPlugin extends PluginAdapter {
@@ -26,6 +28,11 @@ public class MapperDaoExtPlugin extends PluginAdapter {
         interfaze.addSuperInterface(fqjt);// 添加 extends BaseDao<User>
         interfaze.addImportedType(imp);// 添加import common.BaseDao;
         interfaze.getMethods().clear();
+        interfaze.addJavaDocLine("/**");
+        interfaze.addJavaDocLine(" * @数表名称 " + introspectedTable.getFullyQualifiedTable());
+        interfaze.addJavaDocLine(" * @开发日期 " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        interfaze.addJavaDocLine(" * @开发作者 by:liumy ");
+        interfaze.addJavaDocLine(" */");
         return true;
     }
 

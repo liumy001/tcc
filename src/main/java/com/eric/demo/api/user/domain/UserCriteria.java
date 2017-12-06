@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @数表名称 t_user
+ * @开发日期 2017-12-06 12:52:47
+ * @开发作者 by:liumy 
+ */
 public class UserCriteria extends AbstractCriteria {
     protected String orderByClause;
 

@@ -4,6 +4,11 @@ import com.eric.demo.commons.domain.AbstractAuditingEntity;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @数表名称 t_user
+ * @开发日期 2017-12-06 12:52:47
+ * @开发作者 by:liumy 
+ */
 public class User extends AbstractAuditingEntity implements Serializable {
     private String id;
 
