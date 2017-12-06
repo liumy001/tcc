@@ -1,13 +1,11 @@
 package com.eric.demo.api.user.domain;
 
 import com.eric.demo.commons.domain.AbstractCriteria;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserCriteria extends AbstractCriteria implements Serializable{
+public class UserCriteria extends AbstractCriteria {
     protected String orderByClause;
 
     protected boolean distinct;

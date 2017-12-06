@@ -20,7 +20,8 @@
 		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperXmlNamePlugin"/>
 		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperClassNamePlugin"/>
 		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperDaoExtPlugin"/>
-
+		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperEntityExtPlugin"/>
+		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperCriteriaExtPlugin"/>
 
 		<!--	<plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">
                 <property name="fileName" value="${generator.mapperConfigFilename}" />

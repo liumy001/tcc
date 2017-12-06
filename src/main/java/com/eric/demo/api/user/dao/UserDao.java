@@ -8,5 +8,4 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 public interface UserDao extends BaseDao<User, UserCriteria, String> {
-
 }
