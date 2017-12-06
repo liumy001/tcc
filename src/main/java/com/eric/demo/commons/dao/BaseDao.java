@@ -35,4 +35,6 @@ public interface BaseDao<T extends Serializable, E, ID extends Serializable> {
     int logicDeleteById(ID id);
 
     List<T> findList(Map<String, Object> paramMap);
+
+    List<T> findByVo(T entity);
 }

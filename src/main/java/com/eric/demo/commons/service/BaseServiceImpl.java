@@ -167,4 +167,10 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
         return getDao().findList(paramMap);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<T> findByVo(T entity) {
+        return getDao().findByVo(entity);
+    }
+
 }

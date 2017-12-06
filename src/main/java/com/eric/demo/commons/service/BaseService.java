@@ -42,4 +42,6 @@ public interface BaseService<T extends Serializable, E> {
 	int logicDeleteById(String id);
 
 	List<T> findList(Map<String, Object> paramMap);
+
+	List<T> findByVo(T entity);
 }
