@@ -37,13 +37,6 @@ public interface BaseService<T extends Serializable, E> {
 	List<T> findAll();
 	
 	List<T> search(E criteria);
-/*
-	List<T> findAll(Sort sort) throws Exception;
 
-	Page<T> findAll(Pageable pageable) throws Exception;
-	
-	List<T> search(E criteria, Sort sort);
-
-	Page<T> search(E criteria, Pageable pageable);
-*/
+	int logicDeleteById(String id);
 }

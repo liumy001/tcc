@@ -153,80 +153,11 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
 		Assert.notNull(criteria);
 		return getDao().selectByExample(criteria);
 	}
-	
-	/*@Override
-	@Transactional(readOnly = true)
-	public List<T> findAll(Sort sort) throws Exception {
-		Assert.notNull(sort);
-		String orderByClause = "";
-		for (Order o : sort) {
-			orderByClause += " " + o.getProperty() + " "
-					+ o.getDirection().toString() + " ";
-		}
-		E criteria = criteriaClazz.newInstance();
-		criteria.setOrderByClause(orderByClause);
-		return getDao().selectByExample(criteria);
-	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public Page<T> findAll(Pageable pageable) throws Exception {
-		Assert.notNull(pageable);
-		E criteria = null;
-		if (pageable.getSort() != null) {
-			String orderByClause = "";
-			for (Order o : pageable.getSort()) {
-				orderByClause += " " + o.getProperty() + " "
-						+ o.getDirection().toString() + " ";
-			}
-			criteria = criteriaClazz.newInstance();
-			criteria.setOrderByClause(orderByClause);
-		}
-		RowBounds rowBounds = new RowBounds(pageable.getPageNumber(),
-				pageable.getPageSize());
-		List<T> list = getDao().selectByExampleWithRowbounds(criteria,
-				rowBounds);
-		long count = count();
-		return new PageImpl<T>(list, pageable, count);
+	public int logicDeleteById(String id) {
+		Assert.notNull(id);
+		return getDao().logicDeleteById(id);
 	}
-	
-	
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<T> search(E criteria, Sort sort) {
-		Assert.notNull(criteria);
-		Assert.notNull(sort);
-		if (sort != null) {
-			String orderByClause = "";
-			for (Order o : sort) {
-				orderByClause += " " + o.getProperty() + " "
-						+ o.getDirection().toString() + " ";
-			}
-			criteria.setOrderByClause(orderByClause);
-		}
-		return getDao().selectByExample(criteria);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Page<T> search(E criteria, Pageable pageable) {
-		Assert.notNull(criteria);
-		Assert.notNull(pageable);
-		if (pageable.getSort() != null) {
-			String orderByClause = "";
-			for (Order o : pageable.getSort()) {
-				orderByClause += " " + o.getProperty() + " "
-						+ o.getDirection().toString() + " ";
-			}
-			criteria.setOrderByClause(orderByClause);
-		}
-		RowBounds rowBounds = new RowBounds(pageable.getPageNumber(),
-				pageable.getPageSize());
-		List<T> list = getDao().selectByExampleWithRowbounds(criteria,
-				rowBounds);
-		long count = count();
-		return new PageImpl<T>(list, pageable, count);
-	}*/
 
 }

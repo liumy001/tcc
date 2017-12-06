@@ -3,6 +3,7 @@ package com.eric.demo.commons.domain;
 import java.util.Date;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -11,52 +12,67 @@ import org.springframework.data.annotation.LastModifiedDate;
 @MappedSuperclass
 public abstract class AbstractAuditingEntity extends AbstractEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@CreatedBy
-	@NotNull
-	private String createdBy;
+    @CreatedBy
+    @NotNull
+    protected String createdBy;
 
-	@CreatedDate
-	@NotNull
-	private Date createdDate = new Date();
+    @CreatedDate
+    @NotNull
+    protected Date createdDate = new Date();
 
-	@LastModifiedBy
-	private String lastModifiedBy;
+    @LastModifiedBy
+    protected String lastModifiedBy;
 
-	@LastModifiedDate
-	private Date lastModifiedDate = new Date();
+    @LastModifiedDate
+    protected Date lastModifiedDate = new Date();
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
+    @NotNull
+    protected Integer isDel;
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
+    public Date getCreatedDate() {
+        return createdDate;
+    }
 
-	public String getLastModifiedBy() {
-		return lastModifiedBy;
-	}
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 
-	public void setLastModifiedBy(String lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
-	}
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
 
-	public Date getLastModifiedDate() {
-		return lastModifiedDate;
-	}
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
 
-	public void setLastModifiedDate(Date lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
-	}
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
 
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public AbstractAuditingEntity setIsDel(Integer isDel) {
+        this.isDel = isDel;
+        return this;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 }

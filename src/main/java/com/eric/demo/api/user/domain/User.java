@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @数表名称 t_user
- * @开发日期 2017-12-06 12:52:47
+ * @开发日期 2017-12-06 13:55:59
  * @开发作者 by:liumy 
  */
 public class User extends AbstractAuditingEntity implements Serializable {
@@ -17,14 +17,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String nickname;
 
     private String password;
-
-    private String createdBy;
-
-    private Date createdDate;
-
-    private String lastModifiedBy;
-
-    private Date lastModifiedDate;
 
     private static final long serialVersionUID = 1L;
 
@@ -60,37 +52,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy == null ? null : createdBy.trim();
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy == null ? null : lastModifiedBy.trim();
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 
     @Override
     public String toString() {
@@ -102,6 +64,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", nickname=").append(nickname);
         sb.append(", password=").append(password);
+        sb.append(", isDel=").append(isDel);
         sb.append(", createdBy=").append(createdBy);
         sb.append(", createdDate=").append(createdDate);
         sb.append(", lastModifiedBy=").append(lastModifiedBy);
@@ -127,6 +90,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getIsDel() == null ? other.getIsDel() == null : this.getIsDel().equals(other.getIsDel()))
             && (this.getCreatedBy() == null ? other.getCreatedBy() == null : this.getCreatedBy().equals(other.getCreatedBy()))
             && (this.getCreatedDate() == null ? other.getCreatedDate() == null : this.getCreatedDate().equals(other.getCreatedDate()))
             && (this.getLastModifiedBy() == null ? other.getLastModifiedBy() == null : this.getLastModifiedBy().equals(other.getLastModifiedBy()))
@@ -141,6 +105,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getIsDel() == null) ? 0 : getIsDel().hashCode());
         result = prime * result + ((getCreatedBy() == null) ? 0 : getCreatedBy().hashCode());
         result = prime * result + ((getCreatedDate() == null) ? 0 : getCreatedDate().hashCode());
         result = prime * result + ((getLastModifiedBy() == null) ? 0 : getLastModifiedBy().hashCode());

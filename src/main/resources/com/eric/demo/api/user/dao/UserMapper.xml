@@ -6,6 +6,7 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
     <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
     <result column="last_modified_by" property="lastModifiedBy" jdbcType="VARCHAR" />
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, nickname, password, created_by, created_date, last_modified_by, last_modified_date
+    id, username, nickname, password, is_del, created_by, created_date, last_modified_by, 
+    last_modified_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eric.demo.api.user.domain.UserCriteria" >
     select
@@ -104,11 +106,13 @@
   </delete>
   <insert id="insert" parameterType="com.eric.demo.api.user.domain.User" >
     insert into t_user (id, username, nickname, 
-      password, created_by, created_date, 
-      last_modified_by, last_modified_date)
+      password, is_del, created_by, 
+      created_date, last_modified_by, last_modified_date
+      )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
-      #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP})
+      #{password,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.eric.demo.api.user.domain.User" >
     insert into t_user
@@ -124,6 +128,9 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="isDel != null" >
+        is_del,
       </if>
       <if test="createdBy != null" >
         created_by,
@@ -150,6 +157,9 @@
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
       </if>
       <if test="createdBy != null" >
         #{createdBy,jdbcType=VARCHAR},
@@ -186,6 +196,9 @@
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=BIT},
+      </if>
       <if test="record.createdBy != null" >
         created_by = #{record.createdBy,jdbcType=VARCHAR},
       </if>
@@ -209,6 +222,7 @@
       username = #{record.username,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=BIT},
       created_by = #{record.createdBy,jdbcType=VARCHAR},
       created_date = #{record.createdDate,jdbcType=TIMESTAMP},
       last_modified_by = #{record.lastModifiedBy,jdbcType=VARCHAR},
@@ -228,6 +242,9 @@
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
       </if>
       <if test="createdBy != null" >
         created_by = #{createdBy,jdbcType=VARCHAR},
@@ -249,6 +266,7 @@
     set username = #{username,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
       created_by = #{createdBy,jdbcType=VARCHAR},
       created_date = #{createdDate,jdbcType=TIMESTAMP},
       last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
@@ -270,4 +288,9 @@
     </if>
   </select>
   <cache />
+  <update id="logicDeleteById" parameterType="java.lang.String" >
+    update t_user 
+ 	set is_del=1 
+ 		where id=#{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

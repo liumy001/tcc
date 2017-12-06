@@ -37,4 +37,5 @@ public class MapperEntityExtPlugin extends PluginAdapter {
         return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
     }
 
+
 }
