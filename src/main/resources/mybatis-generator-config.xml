@@ -76,7 +76,5 @@
 		<!-- 配置表信息 -->
 		<table schema="Boot" tableName="t_user" domainObjectName="User" />
 
-
-		<!--mybatis-generator:generate-->
 	</context>
 </generatorConfiguration>  
