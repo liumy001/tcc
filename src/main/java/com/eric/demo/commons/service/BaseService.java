@@ -2,6 +2,7 @@ package com.eric.demo.commons.service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /*import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,4 +40,6 @@ public interface BaseService<T extends Serializable, E> {
 	List<T> search(E criteria);
 
 	int logicDeleteById(String id);
+
+	List<T> findList(Map<String, Object> paramMap);
 }

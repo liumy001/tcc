@@ -293,4 +293,238 @@
  	set is_del=1 
  		where id=#{id,jdbcType=VARCHAR}
   </update>
+  <sql id="Base_Query_Map_Condition" >
+    <trim prefix="where" prefixOverrides="and | or" >
+      <if test="id != null" >
+         AND id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="username != null" >
+         AND username = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="nickname != null" >
+         AND nickname = #{nickname,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null" >
+         AND password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="isDel != null" >
+         AND is_del = #{isDel,jdbcType=BIT}
+      </if>
+      <if test="createdBy != null" >
+         AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null" >
+         AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastModifiedBy != null" >
+         AND last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastModifiedDate != null" >
+         AND last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myGreater_id != null" >
+         AND id &gt; #{myGreater_id,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_username != null" >
+         AND username &gt; #{myGreater_username,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_nickname != null" >
+         AND nickname &gt; #{myGreater_nickname,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_password != null" >
+         AND password &gt; #{myGreater_password,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_isDel != null" >
+         AND is_del &gt; #{myGreater_isDel,jdbcType=BIT}
+      </if>
+      <if test="myGreater_createdBy != null" >
+         AND created_by &gt; #{myGreater_createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_createdDate != null" >
+         AND created_date &gt; #{myGreater_createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myGreater_lastModifiedBy != null" >
+         AND last_modified_by &gt; #{myGreater_lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_lastModifiedDate != null" >
+         AND last_modified_date &gt; #{myGreater_lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLesser_id != null" >
+         AND id &lt; #{myLesser_id,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_username != null" >
+         AND username &lt; #{myLesser_username,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_nickname != null" >
+         AND nickname &lt; #{myLesser_nickname,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_password != null" >
+         AND password &lt; #{myLesser_password,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_isDel != null" >
+         AND is_del &lt; #{myLesser_isDel,jdbcType=BIT}
+      </if>
+      <if test="myLesser_createdBy != null" >
+         AND created_by &lt; #{myLesser_createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_createdDate != null" >
+         AND created_date &lt; #{myLesser_createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLesser_lastModifiedBy != null" >
+         AND last_modified_by &lt; #{myLesser_lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_lastModifiedDate != null" >
+         AND last_modified_date &lt; #{myLesser_lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLike_id != null" >
+         AND id like CONCAT('%', #{myLike_id,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_username != null" >
+         AND username like CONCAT('%', #{myLike_username,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_nickname != null" >
+         AND nickname like CONCAT('%', #{myLike_nickname,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_password != null" >
+         AND password like CONCAT('%', #{myLike_password,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_isDel != null" >
+         AND is_del like CONCAT('%', #{myLike_isDel,jdbcType=BIT},'%' )
+      </if>
+      <if test="myLike_createdBy != null" >
+         AND created_by like CONCAT('%', #{myLike_createdBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_createdDate != null" >
+         AND created_date like CONCAT('%', #{myLike_createdDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLike_lastModifiedBy != null" >
+         AND last_modified_by like CONCAT('%', #{myLike_lastModifiedBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_lastModifiedDate != null" >
+         AND last_modified_date like CONCAT('%', #{myLike_lastModifiedDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLikeStart_id != null" >
+         AND id like CONCAT('%', #{myLikeStart_id,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_username != null" >
+         AND username like CONCAT('%', #{myLikeStart_username,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_nickname != null" >
+         AND nickname like CONCAT('%', #{myLikeStart_nickname,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_password != null" >
+         AND password like CONCAT('%', #{myLikeStart_password,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_isDel != null" >
+         AND is_del like CONCAT('%', #{myLikeStart_isDel,jdbcType=BIT})
+      </if>
+      <if test="myLikeStart_createdBy != null" >
+         AND created_by like CONCAT('%', #{myLikeStart_createdBy,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_createdDate != null" >
+         AND created_date like CONCAT('%', #{myLikeStart_createdDate,jdbcType=TIMESTAMP})
+      </if>
+      <if test="myLikeStart_lastModifiedBy != null" >
+         AND last_modified_by like CONCAT('%', #{myLikeStart_lastModifiedBy,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_lastModifiedDate != null" >
+         AND last_modified_date like CONCAT('%', #{myLikeStart_lastModifiedDate,jdbcType=TIMESTAMP})
+      </if>
+      <if test="myLikeEnd_id != null" >
+         AND id like CONCAT( #{myLikeEnd_id,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_username != null" >
+         AND username like CONCAT( #{myLikeEnd_username,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_nickname != null" >
+         AND nickname like CONCAT( #{myLikeEnd_nickname,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_password != null" >
+         AND password like CONCAT( #{myLikeEnd_password,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_isDel != null" >
+         AND is_del like CONCAT( #{myLikeEnd_isDel,jdbcType=BIT},'%' )
+      </if>
+      <if test="myLikeEnd_createdBy != null" >
+         AND created_by like CONCAT( #{myLikeEnd_createdBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_createdDate != null" >
+         AND created_date like CONCAT( #{myLikeEnd_createdDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLikeEnd_lastModifiedBy != null" >
+         AND last_modified_by like CONCAT( #{myLikeEnd_lastModifiedBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_lastModifiedDate != null" >
+         AND last_modified_date like CONCAT( #{myLikeEnd_lastModifiedDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myIn_id != null" >
+         AND id in <foreach item="item" index="index" collection="myIn_id" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_username != null" >
+         AND username in <foreach item="item" index="index" collection="myIn_username" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_nickname != null" >
+         AND nickname in <foreach item="item" index="index" collection="myIn_nickname" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_password != null" >
+         AND password in <foreach item="item" index="index" collection="myIn_password" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_isDel != null" >
+         AND is_del in <foreach item="item" index="index" collection="myIn_isDel" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_createdBy != null" >
+         AND created_by in <foreach item="item" index="index" collection="myIn_createdBy" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_createdDate != null" >
+         AND created_date in <foreach item="item" index="index" collection="myIn_createdDate" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_lastModifiedBy != null" >
+         AND last_modified_by in <foreach item="item" index="index" collection="myIn_lastModifiedBy" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_lastModifiedDate != null" >
+         AND last_modified_date in <foreach item="item" index="index" collection="myIn_lastModifiedDate" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Query_Vo_Condition" >
+    <trim prefix="where" prefixOverrides="and | or" >
+      <if test="id != null" >
+         AND id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="username != null" >
+         AND username = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="nickname != null" >
+         AND nickname = #{nickname,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null" >
+         AND password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="isDel != null" >
+         AND is_del = #{isDel,jdbcType=BIT}
+      </if>
+      <if test="createdBy != null" >
+         AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null" >
+         AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastModifiedBy != null" >
+         AND last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastModifiedDate != null" >
+         AND last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </sql>
+  <select id="findList" parameterType="map" resultMap="BaseResultMap" >
+      select <include refid='Base_Column_List' /> 
+	 from t_user 
+ 	 <include refid='Base_Query_Map_Condition' />
+  </select>
+  <select id="findByVo" parameterType="com.eric.demo.api.user.domain.User" resultMap="BaseResultMap" >
+      select <include refid='Base_Column_List' /> 
+	 from t_user 
+ 	 <include refid='Base_Query_Vo_Condition' />
+  </select>
 </mapper>

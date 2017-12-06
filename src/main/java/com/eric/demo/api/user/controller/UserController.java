@@ -1,12 +1,14 @@
 package com.eric.demo.api.user.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.github.pagehelper.PageHelper;
+import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,9 @@ public class UserController {
 	public ResponseEntity<List<User>> getAll() {
 		log.info("REST request to get all Users");
 		//PageHelper.startPage(1,2);
-		return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+		Map<String,Object> map=Maps.newHashMap();
+		map.put("username","123");
+		return new ResponseEntity<>(userService.findList(map), HttpStatus.OK);
 	}
 
 	/**

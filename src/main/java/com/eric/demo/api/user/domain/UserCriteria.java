@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @数表名称 t_user
- * @开发日期 2017-12-06 13:55:59
+ * @开发日期 2017-12-06 15:18:09
  * @开发作者 by:liumy 
  */
 public class UserCriteria extends AbstractCriteria {

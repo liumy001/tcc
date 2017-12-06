@@ -2,6 +2,7 @@ package com.eric.demo.commons.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -32,4 +33,6 @@ public interface BaseDao<T extends Serializable, E, ID extends Serializable> {
     int updateByPrimaryKey(T record);
 
     int logicDeleteById(ID id);
+
+    List<T> findList(Map<String, Object> paramMap);
 }
