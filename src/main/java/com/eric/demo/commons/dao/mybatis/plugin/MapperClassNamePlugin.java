@@ -14,8 +14,6 @@ public class MapperClassNamePlugin extends PluginAdapter {
 	@Override
 	public void initialized(IntrospectedTable table) {
 		super.initialized(table);
-
-		table.setMyBatis3JavaMapperType(table.getMyBatis3JavaMapperType()
-				.replaceAll("Mapper$", "Dao"));
+		table.setMyBatis3JavaMapperType(table.getMyBatis3JavaMapperType().replaceAll("Mapper$", "Dao"));
 	}
 }

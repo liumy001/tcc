@@ -17,13 +17,17 @@
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 		<plugin type="org.mybatis.generator.plugins.CachePlugin" />
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperXmlNamePlugin"/>
+		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperClassNamePlugin"/>
+		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperDaoExtPlugin"/>
 
-	<!--	<plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">
-			<property name="fileName" value="${generator.mapperConfigFilename}" />
-			<property name="targetPackage" value="${generator.mapperPackage}" />
-			<property name="targetProject"
-				value="${generator.targetProject}/src/main/resources" />
-		</plugin>-->
+
+		<!--	<plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">
+                <property name="fileName" value="${generator.mapperConfigFilename}" />
+                <property name="targetPackage" value="${generator.mapperPackage}" />
+                <property name="targetProject"
+                    value="${generator.targetProject}/src/main/resources" />
+            </plugin>-->
 		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
 			<property name="searchString" value="Example$" />
 			<property name="replaceString" value="Criteria" />
