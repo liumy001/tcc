@@ -41,7 +41,6 @@ public class UserController {
 		log.info("REST request to get all Users");
 		//PageHelper.startPage(1,2);
 		Map<String,Object> map=Maps.newHashMap();
-		map.put("username","123");
 		return new ResponseEntity<>(userService.findList(map), HttpStatus.OK);
 	}
 

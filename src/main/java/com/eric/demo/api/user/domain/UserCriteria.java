@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @数表名称 t_user
- * @开发日期 2017-12-06 15:18:09
+ * @开发日期 2017-12-06 15:49:28
  * @开发作者 by:liumy 
  */
 public class UserCriteria extends AbstractCriteria {
@@ -401,52 +401,52 @@ public class UserCriteria extends AbstractCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andIsDelEqualTo(Boolean value) {
+        public Criteria andIsDelEqualTo(Integer value) {
             addCriterion("is_del =", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotEqualTo(Boolean value) {
+        public Criteria andIsDelNotEqualTo(Integer value) {
             addCriterion("is_del <>", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelGreaterThan(Boolean value) {
+        public Criteria andIsDelGreaterThan(Integer value) {
             addCriterion("is_del >", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsDelGreaterThanOrEqualTo(Integer value) {
             addCriterion("is_del >=", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelLessThan(Boolean value) {
+        public Criteria andIsDelLessThan(Integer value) {
             addCriterion("is_del <", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsDelLessThanOrEqualTo(Integer value) {
             addCriterion("is_del <=", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelIn(List<Boolean> values) {
+        public Criteria andIsDelIn(List<Integer> values) {
             addCriterion("is_del in", values, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotIn(List<Boolean> values) {
+        public Criteria andIsDelNotIn(List<Integer> values) {
             addCriterion("is_del not in", values, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsDelBetween(Integer value1, Integer value2) {
             addCriterion("is_del between", value1, value2, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsDelNotBetween(Integer value1, Integer value2) {
             addCriterion("is_del not between", value1, value2, "isDel");
             return (Criteria) this;
         }

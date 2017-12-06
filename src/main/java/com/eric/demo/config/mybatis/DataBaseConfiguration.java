@@ -2,6 +2,7 @@ package com.eric.demo.config.mybatis;
 
 import java.util.Arrays;
 import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -19,57 +20,54 @@ import com.zaxxer.hikari.HikariDataSource;
 @EnableTransactionManagement
 public class DataBaseConfiguration implements EnvironmentAware {
 
-	private RelaxedPropertyResolver propertyResolver;
+    private RelaxedPropertyResolver propertyResolver;
 
-	private static Logger log = LoggerFactory
-			.getLogger(DataBaseConfiguration.class);
+    private static Logger log = LoggerFactory
+            .getLogger(DataBaseConfiguration.class);
 
-	private Environment env;
+    private Environment env;
 
-	@Override
-	public void setEnvironment(Environment env) {
-		this.env = env;
-		this.propertyResolver = new RelaxedPropertyResolver(env, "jdbc.");
-	}
+    @Override
+    public void setEnvironment(Environment env) {
+        this.env = env;
+        this.propertyResolver = new RelaxedPropertyResolver(env, "jdbc.");
+    }
 
-	@Bean(destroyMethod = "shutdown")
-	public DataSource dataSource() {
-		log.debug("Configruing DataSource");
-		if (propertyResolver.getProperty("url") == null
-				&& propertyResolver.getProperty("databaseName") == null) {
-			log.error("Your database conncetion pool configuration is incorrct ! The application "
-					+ "cannot start . Please check your jdbc");
-			Arrays.toString(env.getActiveProfiles());
-			throw new ApplicationContextException(
-					"DataBase connection pool is not configured correctly");
-		}
-		HikariConfig config = new HikariConfig();
-		config.setDataSourceClassName(propertyResolver
-				.getProperty("dataSourceClassName"));
-		if (propertyResolver.getProperty("url") == null
-				|| "".equals(propertyResolver.getProperty("url"))) {
-			config.addDataSourceProperty("databaseName",
-					propertyResolver.getProperty("databaseName"));
-			config.addDataSourceProperty("serverName",
-					propertyResolver.getProperty("serverName"));
-		} else {
-			config.addDataSourceProperty("url",
-					propertyResolver.getProperty("url"));
-		}
-		config.setUsername(propertyResolver.getProperty("username"));
-		config.setPassword(propertyResolver.getProperty("password"));
-		if ("com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
-				.equals(propertyResolver.getProperty("dataSourceName"))) {
-			config.addDataSourceProperty("cachePrepStmts",
-					propertyResolver.getProperty("cachePrepStmts"));
-			config.addDataSourceProperty("prepStmtCacheSize",
-					propertyResolver.getProperty("prepStmtsCacheSize"));
-			config.addDataSourceProperty("prepStmtCacheSqlLimit",
-					propertyResolver.getProperty("prepStmtCacheSqlLimit"));
-			config.addDataSourceProperty("userServerPrepStmts",
-					propertyResolver.getProperty("userServerPrepStmts"));
-		}
-		return new HikariDataSource(config);
-	}
+    @Bean(destroyMethod = "shutdown")
+    public DataSource dataSource() {
+        log.debug("Configruing DataSource");
+        if (propertyResolver.getProperty("url") == null
+                && propertyResolver.getProperty("databaseName") == null) {
+            log.error("Your database conncetion pool configuration is incorrct ! The application "
+                    + "cannot start . Please check your jdbc");
+            Arrays.toString(env.getActiveProfiles());
+            throw new ApplicationContextException(
+                    "DataBase connection pool is not configured correctly");
+        }
+        HikariConfig config = new HikariConfig();
+        config.setDataSourceClassName(propertyResolver
+                .getProperty("dataSourceClassName"));
+        if (propertyResolver.getProperty("url") == null || "".equals(propertyResolver.getProperty("url"))) {
+            config.addDataSourceProperty("databaseName", propertyResolver.getProperty("databaseName"));
+            config.addDataSourceProperty("serverName", propertyResolver.getProperty("serverName"));
+        } else {
+            config.addDataSourceProperty("url", propertyResolver.getProperty("url"));
+        }
+        config.setUsername(propertyResolver.getProperty("username"));
+        config.setPassword(propertyResolver.getProperty("password"));
+        if ("com.mysql.jdbc.jdbc2.optional.MysqlDataSource".equals(propertyResolver.getProperty("dataSourceName"))) {
+            config.addDataSourceProperty("cachePrepStmts", propertyResolver.getProperty("cachePrepStmts"));
+            config.addDataSourceProperty("prepStmtCacheSize", propertyResolver.getProperty("prepStmtsCacheSize"));
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", propertyResolver.getProperty("prepStmtCacheSqlLimit"));
+            config.addDataSourceProperty("userServerPrepStmts", propertyResolver.getProperty("userServerPrepStmts"));
+        }
+        config.setConnectionTestQuery("select 1");
+        config.setConnectionTimeout(30000);
+        config.setIdleTimeout(60000);
+        config.setMaxLifetime(1800000);
+        config.setMinimumIdle(1);
+        config.setMaximumPoolSize(100);
+        return new HikariDataSource(config);
+    }
 
 }

@@ -63,14 +63,9 @@ public abstract class AbstractAuditingEntity extends AbstractEntity {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    public Integer getIsDel() {
-        return isDel;
-    }
+    public Integer getIsDel() { return isDel; }
 
-    public AbstractAuditingEntity setIsDel(Integer isDel) {
-        this.isDel = isDel;
-        return this;
-    }
+    public void setIsDel(Integer isDel) { this.isDel = isDel; }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
