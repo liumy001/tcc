@@ -39,7 +39,6 @@ public class UserController {
      */
     @RequestMapping(value = "/users")
     public ResponseEntity<List<User>> getAll() {
-        log.info("REST request to get all Users");
         //PageHelper.startPage(1,2);
         Map<String, Object> map = Maps.newHashMap();
         return new ResponseEntity<>(userService.findList(map), HttpStatus.OK);
