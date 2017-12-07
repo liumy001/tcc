@@ -1,5 +1,6 @@
 package com.eric.demo.api.user.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.eric.demo.commons.domain.AbstractAuditingEntity;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     private String password;
 
+    @JSONField(serialize = false)
     private Integer isDel;
 
     private String createdBy;

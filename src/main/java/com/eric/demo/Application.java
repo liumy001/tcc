@@ -21,6 +21,8 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.List;
+
 @SpringBootApplication
 @EnableAsync
 @EnableCaching
@@ -30,16 +32,15 @@ public class Application extends WebMvcConfigurerAdapter {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
     }
-    @Bean
-    public HttpMessageConverters fastJsonHttpMessageConverters(){
-        //1、定义convert转换消息对象
-        FastJsonHttpMessageConverter fasConverter  = new  FastJsonHttpMessageConverter();
-        //2、添加fastJson的配置信息，比如：是否要格式化返回json数据
+
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        super.configureMessageConverters(converters);
+        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        //3、再convert中添加配置信息
-        fasConverter.setFastJsonConfig(fastJsonConfig);
-        HttpMessageConverter<?> converter = fasConverter;
-        return new HttpMessageConverters(converter);
+        fastConverter.setFastJsonConfig(fastJsonConfig);
+        converters.add(fastConverter);
     }
 }
