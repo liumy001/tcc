@@ -287,7 +287,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <cache />
   <update id="logicDeleteById" parameterType="java.lang.String" >
     update t_user 
  	set is_del=1 
@@ -517,14 +516,16 @@
       </if>
     </trim>
   </sql>
-  <select id="findList" parameterType="map" resultMap="BaseResultMap" >
+  <select id="findList" parameterType="map" resultMap="BaseResultMap">
       select <include refid='Base_Column_List' /> 
 	 from t_user 
  	 <include refid='Base_Query_Map_Condition' />
   </select>
-  <select id="findByVo" parameterType="com.eric.demo.api.user.domain.User" resultMap="BaseResultMap" >
+  <!--useCache="false"-->
+  <select id="findByVo" parameterType="com.eric.demo.api.user.domain.User" resultMap="BaseResultMap"   >
       select <include refid='Base_Column_List' /> 
 	 from t_user 
  	 <include refid='Base_Query_Vo_Condition' />
   </select>
+ <!-- <cache/>-->
 </mapper>

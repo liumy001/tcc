@@ -15,7 +15,7 @@
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
-		<plugin type="org.mybatis.generator.plugins.CachePlugin" />
+		<!--<plugin type="org.mybatis.generator.plugins.CachePlugin" />-->
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
 		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperXmlNamePlugin"/>
 		<plugin type="com.eric.demo.commons.dao.mybatis.plugin.MapperClassNamePlugin"/>
