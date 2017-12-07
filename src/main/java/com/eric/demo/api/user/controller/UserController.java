@@ -28,63 +28,63 @@ import com.eric.demo.api.user.service.UserService;
 @RequestMapping(value = "/api")
 public class UserController {
 
-	private final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	/**
-	 * GET /users -> get all the users
-	 */
-	@RequestMapping(value = "/users", method = {RequestMethod.POST,RequestMethod.GET})
-	public ResponseEntity<List<User>> getAll() {
-		log.info("REST request to get all Users");
-		//PageHelper.startPage(1,2);
-		Map<String,Object> map=Maps.newHashMap();
-		return new ResponseEntity<>(userService.findList(map), HttpStatus.OK);
-	}
+    /**
+     * GET /users -> get all the users
+     */
+    @RequestMapping(value = "/users",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> getAll() {
+        log.info("REST request to get all Users");
+        //PageHelper.startPage(1,2);
+        Map<String, Object> map = Maps.newHashMap();
+        return new ResponseEntity<>(userService.findList(map), HttpStatus.OK);
+    }
 
-	/**
-	 * GET /users/:username -> get the "username" user
-	 */
-	@RequestMapping(value = "/users/{username}", method = RequestMethod.GET)
-	public User getUser(@PathVariable String username,
-			HttpServletResponse response) {
-		log.debug("REST request to get User : {}", username);
-		User user = userService.findOneByUsername(username);
-		if (user == null) {
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		}
-		return user;
-	}
+    /**
+     * GET /users/:username -> get the "username" user
+     */
+    @RequestMapping(value = "/users/{username}", method = RequestMethod.GET)
+    public User getUser(@PathVariable String username,
+                        HttpServletResponse response) {
+        log.debug("REST request to get User : {}", username);
+        User user = userService.findOneByUsername(username);
+        if (user == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+        return user;
+    }
 
-	/**
-	 * POST /users -> create a new user
-	 */
-	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public ResponseEntity<?> create(@Valid @RequestBody User userDto,
-			HttpServletRequest request) {
-		User user = userService.findOneByUsername(userDto.getUsername());
-		if (user != null) {
-			return ResponseEntity.badRequest()
-					.contentType(MediaType.TEXT_PLAIN)
-					.body("username already in use");
-		}
-		userService.create(userDto);
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
+    /**
+     * POST /users -> create a new user
+     */
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    public ResponseEntity<?> create(@Valid @RequestBody User userDto,
+                                    HttpServletRequest request) {
+        User user = userService.findOneByUsername(userDto.getUsername());
+        if (user != null) {
+            return ResponseEntity.badRequest()
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body("username already in use");
+        }
+        userService.create(userDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
-	/**
-	 * POST /users/change_password -> changes the current user's password
-	 */
-	@RequestMapping(value = "/users/change_password", method = RequestMethod.POST)
-	public ResponseEntity<String> changePassword(@RequestBody String password) {
-		if (password.isEmpty() || password.length() < 5
-				|| password.length() > 50) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		userService.changePassword(password);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+    /**
+     * POST /users/change_password -> changes the current user's password
+     */
+    @RequestMapping(value = "/users/change_password", method = RequestMethod.POST)
+    public ResponseEntity<String> changePassword(@RequestBody String password) {
+        if (password.isEmpty() || password.length() < 5
+                || password.length() > 50) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        userService.changePassword(password);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

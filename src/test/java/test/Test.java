@@ -34,14 +34,16 @@ public class Test {
                 @Override
                 public void run() {
                     for (int i = 0; i < 10000000; i++) {
-                        String s = HttpClientUtil.httpGetRequest("http://60.205.229.68:8080/api/users");
+                        String s = HttpClientUtil.httpPostRequest("http://127.0.0.1:8080/api/users");
                         System.out.println("-----------------------"+s+"---------------------------------------------------------");
                     }
                 }
             }).start();
         }
-
         Thread.sleep(Integer.MAX_VALUE);
+    }
+
+    public void test2()throws Exception{
 
     }
 }
