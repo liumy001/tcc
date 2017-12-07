@@ -27,14 +27,14 @@ import java.util.List;
 @EnableAsync
 @EnableCaching
 @EnableRedisHttpSession
-public class Application extends WebMvcConfigurerAdapter {
+public class Application  {//extends WebMvcConfigurerAdapter
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
     }
 
 
-    @Override
+ /*   @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
@@ -42,5 +42,5 @@ public class Application extends WebMvcConfigurerAdapter {
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         fastConverter.setFastJsonConfig(fastJsonConfig);
         converters.add(fastConverter);
-    }
+    }*/
 }
