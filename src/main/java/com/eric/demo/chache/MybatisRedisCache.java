@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * mybatis二级缓存配置，默认不开启
+ */
 public class MybatisRedisCache implements Cache {
     private static final Logger logger = LoggerFactory.getLogger(MybatisRedisCache.class);
 
