@@ -22,7 +22,7 @@ public class Test {
     public void test() {
         User user = new User();
         user.setUsername("eric7");
-        user.setPassword("tttuuuooo");
+        user.setPassword("tthhjhjhjhjho");
         System.out.println(userService.save(user));
     }
 

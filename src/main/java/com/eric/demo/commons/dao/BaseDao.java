@@ -1,11 +1,10 @@
 package com.eric.demo.commons.dao;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
 
 public interface BaseDao<T extends Serializable, E, ID extends Serializable> {
     int countByExample(E example);
@@ -34,6 +33,7 @@ public interface BaseDao<T extends Serializable, E, ID extends Serializable> {
 
     int logicDeleteById(ID id);
 
+    //@CacheEvict(value = "cache1")
     List<T> findList(Map<String, Object> paramMap);
 
     List<T> findByVo(T entity);

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;*/
 import org.springframework.beans.BeanUtils;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -100,19 +101,21 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public T findOne(String id) {
         Assert.notNull(id);
         return getDao().selectByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public boolean exists(String id) {
         Assert.notNull(id);
         return findOne(id) != null;
     }
 
     @Override
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public long count() {
         return getDao().countByExample(null);
     }
@@ -143,13 +146,13 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> findAll() {
         return getDao().selectByExample(null);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> search(E criteria) {
         Assert.notNull(criteria);
         return getDao().selectByExample(criteria);
@@ -162,13 +165,13 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> findList(Map<String, Object> paramMap) {
         return getDao().findList(paramMap);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> findByVo(T entity) {
         return getDao().findByVo(entity);
     }

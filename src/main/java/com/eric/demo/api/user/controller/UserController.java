@@ -34,9 +34,10 @@ public class UserController {
     private UserService userService;
 
     /**
+     * consumes= MediaType.MULTIPART_FORM_DATA_VALUE
      * GET /users -> get all the users
      */
-    @RequestMapping(value = "/users",consumes= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/users")
     public ResponseEntity<List<User>> getAll() {
         log.info("REST request to get all Users");
         //PageHelper.startPage(1,2);
