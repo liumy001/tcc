@@ -20,22 +20,24 @@ public class Test {
 
     @org.junit.Test
     public void test() {
-        User user = new User();
-        user.setUsername("eric7");
-        user.setPassword("tthhjhjhjhjho");
-        System.out.println(userService.save(user));
+        for (int i = 0; i < 100; i++) {
+            User user = new User();
+            user.setUsername("eric7");
+            user.setPassword("tthhjhjhjhjho");
+            System.out.println(userService.save(user));
+        }
     }
 
 
     @org.junit.Test
-    public void test1() throws Exception{
+    public void test1() throws Exception {
         for (int i = 0; i < 500; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     for (int i = 0; i < 10000000; i++) {
                         String s = HttpClientUtil.httpPostRequest("http://127.0.0.1:8080/api/users");
-                        System.out.println("-----------------------"+s+"---------------------------------------------------------");
+                        System.out.println("-----------------------" + s + "---------------------------------------------------------");
                     }
                 }
             }).start();
@@ -43,7 +45,7 @@ public class Test {
         Thread.sleep(Integer.MAX_VALUE);
     }
 
-    public void test2()throws Exception{
+    public void test2() throws Exception {
 
     }
 }
