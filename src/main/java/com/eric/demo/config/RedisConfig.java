@@ -57,9 +57,9 @@ public class RedisConfig {
     @Value("${redis.app}")
     private String appName;
 
-    @Bean(name="redisClient")
-    public RedisClientTemplate getRedisClientTemplate(){
-        LOGGER.info("初始化redis："+appName);
+    @Bean(name = "redisClient")
+    public RedisClientTemplate getRedisClientTemplate() {
+        LOGGER.info("系统初始化redis：" + appName);
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxTotal(maxTotal);
