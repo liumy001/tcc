@@ -138,7 +138,7 @@
         <queueSize>512</queueSize>
         <appender-ref ref="FILE_ERROR"/>
     </appender>
-    <root level="debug">
+    <root level="info">
         <!-- appender referenced after it is defined -->
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ASYNC_LOG"/>
@@ -147,6 +147,6 @@
         <appender-ref ref="ASYNC_LOG_WARN"/>
         <appender-ref ref="ASYNC_LOG_ERROR"/>
     </root>
-    <logger name="org.springframework" level="debug"/>
-    <logger name="com.zaxxer" level="debug"/>
+    <logger name="org.springframework" level="info"/>
+    <logger name="com.zaxxer" level="info"/>
 </configuration>
