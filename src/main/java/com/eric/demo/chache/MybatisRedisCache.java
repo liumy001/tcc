@@ -45,7 +45,7 @@ public class MybatisRedisCache implements Cache {
     public void putObject(Object key, Object value) {
         if (value != null) {
             // 向Redis中添加数据，有效时间是2天
-            redisTemplate.opsForValue().set(key.toString(), value, 5, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(key.toString(), value, 5, TimeUnit.HOURS);
         }
     }
 

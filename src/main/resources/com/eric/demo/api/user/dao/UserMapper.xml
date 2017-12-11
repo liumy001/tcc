@@ -527,5 +527,5 @@
 	 from t_user 
  	 <include refid='Base_Query_Vo_Condition' />
   </select>
- <!-- <cache/>-->
+  <cache/>
 </mapper>
