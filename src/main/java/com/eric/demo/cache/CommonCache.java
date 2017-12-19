@@ -1,4 +1,4 @@
-package com.eric.demo.api.user.cache;
+package com.eric.demo.cache;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -16,7 +16,7 @@ public abstract class CommonCache<T, K> {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    public final static String Prefix = "dcs";
+    public final static String Prefix = "tcc";
 
     //spring上下文货物redis操作模板
     @Autowired
