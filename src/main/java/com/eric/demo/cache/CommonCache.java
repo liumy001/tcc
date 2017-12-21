@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * redis缓存通用模板封装
  * liumy
@@ -49,7 +51,7 @@ public abstract class CommonCache<T, K> {
                 logger.error("获取数据异常", e);
             }
             try {
-                redisTemplate.opsForValue().set(Prefix + keyPrefix + "-" + JSONObject.toJSONString(key), JSONObject.toJSONString(value), time);
+                redisTemplate.opsForValue().set(Prefix + keyPrefix + "-" + JSONObject.toJSONString(key), JSONObject.toJSONString(value), time, TimeUnit.SECONDS);
             } catch (Exception e) {
                 logger.error("数据存入redis缓存异常", e);
             }

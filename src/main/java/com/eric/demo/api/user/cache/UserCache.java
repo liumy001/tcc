@@ -15,10 +15,11 @@ public class UserCache extends CommonCache<String, UserCacheDto> {
 
     @Override
     public UserCacheDto execute(String key) throws Exception {
-        return get("user-", key, UserCacheDto.class,new Fun<String, UserCacheDto>() {
+        setTime(10);
+        return get("uuu-", key, UserCacheDto.class, new Fun<String, UserCacheDto>() {
             @Override
             public UserCacheDto get(String key) throws Exception {
-                UserCacheDto cache = new UserCacheDto().setUserList( userService.findList(Maps.newHashMap()));
+                UserCacheDto cache = new UserCacheDto().setUserList(userService.findList(Maps.newHashMap()));
                 return cache;
             }
         });
