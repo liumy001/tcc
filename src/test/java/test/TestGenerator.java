@@ -1,5 +1,6 @@
 package test;
 
+import com.eric.demo.commons.util.HttpClientUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -30,5 +31,14 @@ public class TestGenerator {
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
+    }
+
+
+    @Test
+    public void  test1()throws Exception{
+        while (true){
+            String a=  HttpClientUtil.httpGetRequest("http://localhost:55673/json/CHQueryBaiduMapAddress?Keyword=%E9%93%B6%E8%A1%8C&CityName=%E5%8C%97%E4%BA%AC&pageNum=0&pageSize=10&cityOnly=true");
+            System.out.println(a);
+        }
     }
 }

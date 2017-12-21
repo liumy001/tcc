@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.eric.demo.api.user.cache.UserCache;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
@@ -31,37 +32,24 @@ public class UserController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private UserService userService;
+    private UserCache userCache;
 
     /**
      * consumes= MediaType.MULTIPART_FORM_DATA_VALUE
      * GET /users -> get all the users
      */
     @RequestMapping(value = "/users")
-    public ResponseEntity<List<User>> getAll() {
+    public ResponseEntity<List<User>> getAll() throws Exception {
         //PageHelper.startPage(1,2);
         Map<String, Object> map = Maps.newHashMap();
-        return new ResponseEntity<>(userService.findList(map), HttpStatus.OK);
+        return new ResponseEntity<>(userCache.execute("findAllUser").getUserList(), HttpStatus.OK);
     }
 
-    /**
-     * GET /users/:username -> get the "username" user
-     */
-    @RequestMapping(value = "/users/{username}", method = RequestMethod.GET)
-    public User getUser(@PathVariable String username,
-                        HttpServletResponse response) {
-        log.debug("REST request to get User : {}", username);
-        User user = userService.findOneByUsername(username);
-        if (user == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
-        return user;
-    }
 
     /**
      * POST /users -> create a new user
      */
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+/*    @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ResponseEntity<?> create(@Valid @RequestBody User userDto,
                                     HttpServletRequest request) {
         User user = userService.findOneByUsername(userDto.getUsername());
@@ -72,19 +60,7 @@ public class UserController {
         }
         userService.create(userDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    }*/
 
-    /**
-     * POST /users/change_password -> changes the current user's password
-     */
-    @RequestMapping(value = "/users/change_password", method = RequestMethod.POST)
-    public ResponseEntity<String> changePassword(@RequestBody String password) {
-        if (password.isEmpty() || password.length() < 5
-                || password.length() > 50) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        userService.changePassword(password);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
 }

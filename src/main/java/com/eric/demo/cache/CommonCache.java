@@ -6,6 +6,7 @@ import com.eric.demo.commons.util.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
@@ -20,6 +21,7 @@ public abstract class CommonCache<T, K> {
 
     //spring上下文货物redis操作模板
     @Autowired
+    @Qualifier(value = "redisTemplate1")
     private RedisTemplate<String, Object> redisTemplate;
 
     //默认缓存五分钟
@@ -28,12 +30,13 @@ public abstract class CommonCache<T, K> {
     //是否使用缓存设置
     private Boolean useCache = true;
 
-    protected K get(String keyPrefix, T key, Fun<T, K> fun) throws Exception {
+    protected K get(String keyPrefix, T key, Class<K> type, Fun<T, K> fun) throws Exception {
         //标记本次为在redis取数据超时，此时调用接口取数据
         K value = null;
         if (useCache) {
             try {
-                value = (K) redisTemplate.opsForValue().get(Prefix + keyPrefix + "-" + JSON.toJSONString(key));
+                String data = (String) redisTemplate.opsForValue().get(Prefix + keyPrefix + "-" + JSON.toJSONString(key));
+                value = JSONObject.parseObject(data, type);
                 if (Check.NuNObj(value)) {
                     value = fun.get(key);
                 } else {
@@ -46,7 +49,7 @@ public abstract class CommonCache<T, K> {
                 logger.error("获取数据异常", e);
             }
             try {
-                redisTemplate.opsForValue().set(Prefix + keyPrefix + "-" + JSONObject.toJSONString(key), value, time);
+                redisTemplate.opsForValue().set(Prefix + keyPrefix + "-" + JSONObject.toJSONString(key), JSONObject.toJSONString(value), time);
             } catch (Exception e) {
                 logger.error("数据存入redis缓存异常", e);
             }
@@ -77,7 +80,7 @@ public abstract class CommonCache<T, K> {
         return value;
     }
 
-    static abstract class Fun<T, K> {
+    public static abstract class Fun<T, K> {
         public abstract K get(T key) throws Exception;
 
     }
