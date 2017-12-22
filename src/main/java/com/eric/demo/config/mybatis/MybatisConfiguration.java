@@ -26,7 +26,7 @@ import java.util.Properties;
 @Configuration
 @ConditionalOnClass({EnableTransactionManagement.class})
 @AutoConfigureAfter({DataBaseConfiguration.class})
-@MapperScan(basePackages = {"com.eric.demo.api.**.dao"})
+@MapperScan(basePackages = {"com.eric.demo.**.dao"})
 public class MybatisConfiguration implements EnvironmentAware {
 
     private static Log logger = LogFactory.getLog(MybatisConfiguration.class);

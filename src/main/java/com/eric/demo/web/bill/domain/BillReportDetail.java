@@ -1,38 +1,31 @@
-package com.eric.demo.api.user.domain;
+package com.eric.demo.web.bill.domain;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.eric.demo.commons.domain.AbstractAuditingEntity;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @数表名称 t_user
- * @开发日期 2017-12-06 15:49:28
- * @开发作者 by:liumy
+ * @数表名称 t_bill_report_detail
+ * @开发日期 2017-12-22 15:52:47
+ * @开发作者 by:liumy 
  */
-public class User extends AbstractAuditingEntity implements Serializable {
+public class BillReportDetail extends AbstractAuditingEntity implements Serializable {
     private String id;
 
-    private String username;
+    private String reportId;
 
-    private String nickname;
+    private String categoryId;
 
-    private String password;
+    private Integer totalAmount;
 
-    @JsonIgnore
     private Integer isDel;
 
     private String createdBy;
 
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdDate;
 
     private String lastModifiedBy;
 
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastModifiedDate;
 
     private static final long serialVersionUID = 1L;
@@ -45,28 +38,28 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public String getReportId() {
+        return reportId;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setReportId(String reportId) {
+        this.reportId = reportId == null ? null : reportId.trim();
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId == null ? null : categoryId.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setTotalAmount(Integer totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public Integer getIsDel() {
@@ -116,9 +109,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", nickname=").append(nickname);
-        sb.append(", password=").append(password);
+        sb.append(", reportId=").append(reportId);
+        sb.append(", categoryId=").append(categoryId);
+        sb.append(", totalAmount=").append(totalAmount);
         sb.append(", isDel=").append(isDel);
         sb.append(", createdBy=").append(createdBy);
         sb.append(", createdDate=").append(createdDate);
@@ -140,16 +133,16 @@ public class User extends AbstractAuditingEntity implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        BillReportDetail other = (BillReportDetail) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-                && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-                && (this.getIsDel() == null ? other.getIsDel() == null : this.getIsDel().equals(other.getIsDel()))
-                && (this.getCreatedBy() == null ? other.getCreatedBy() == null : this.getCreatedBy().equals(other.getCreatedBy()))
-                && (this.getCreatedDate() == null ? other.getCreatedDate() == null : this.getCreatedDate().equals(other.getCreatedDate()))
-                && (this.getLastModifiedBy() == null ? other.getLastModifiedBy() == null : this.getLastModifiedBy().equals(other.getLastModifiedBy()))
-                && (this.getLastModifiedDate() == null ? other.getLastModifiedDate() == null : this.getLastModifiedDate().equals(other.getLastModifiedDate()));
+            && (this.getReportId() == null ? other.getReportId() == null : this.getReportId().equals(other.getReportId()))
+            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
+            && (this.getTotalAmount() == null ? other.getTotalAmount() == null : this.getTotalAmount().equals(other.getTotalAmount()))
+            && (this.getIsDel() == null ? other.getIsDel() == null : this.getIsDel().equals(other.getIsDel()))
+            && (this.getCreatedBy() == null ? other.getCreatedBy() == null : this.getCreatedBy().equals(other.getCreatedBy()))
+            && (this.getCreatedDate() == null ? other.getCreatedDate() == null : this.getCreatedDate().equals(other.getCreatedDate()))
+            && (this.getLastModifiedBy() == null ? other.getLastModifiedBy() == null : this.getLastModifiedBy().equals(other.getLastModifiedBy()))
+            && (this.getLastModifiedDate() == null ? other.getLastModifiedDate() == null : this.getLastModifiedDate().equals(other.getLastModifiedDate()));
     }
 
     @Override
@@ -157,9 +150,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getReportId() == null) ? 0 : getReportId().hashCode());
+        result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
+        result = prime * result + ((getTotalAmount() == null) ? 0 : getTotalAmount().hashCode());
         result = prime * result + ((getIsDel() == null) ? 0 : getIsDel().hashCode());
         result = prime * result + ((getCreatedBy() == null) ? 0 : getCreatedBy().hashCode());
         result = prime * result + ((getCreatedDate() == null) ? 0 : getCreatedDate().hashCode());

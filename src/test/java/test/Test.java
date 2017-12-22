@@ -1,11 +1,8 @@
 package test;
 
 import com.eric.demo.Application;
-import com.eric.demo.api.user.domain.User;
-import com.eric.demo.api.user.service.UserService;
 import com.eric.demo.commons.util.HttpClientUtil;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -15,7 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration // 由于是Web项目，Junit需要模拟ServletContext，因此我们需要给我们的测试类加上@WebAppConfiguration
 public class Test {
 
-    @Autowired
+   /* @Autowired
     private UserService userService;
 
     @org.junit.Test
@@ -27,7 +24,7 @@ public class Test {
             System.out.println(userService.save(user));
         }
     }
-
+*/
 
     @org.junit.Test
     public void test1() throws Exception {

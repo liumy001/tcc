@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eric.demo.api.user.dao.UserDao" >
-  <resultMap id="BaseResultMap" type="com.eric.demo.api.user.domain.User" >
+<mapper namespace="com.eric.demo.web.bill.dao.BillReportDetailDao" >
+  <resultMap id="BaseResultMap" type="com.eric.demo.web.bill.domain.BillReportDetail" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="report_id" property="reportId" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
     <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
@@ -71,16 +71,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, nickname, password, is_del, created_by, created_date, last_modified_by, 
+    id, report_id, category_id, total_amount, is_del, created_by, created_date, last_modified_by, 
     last_modified_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eric.demo.api.user.domain.UserCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eric.demo.web.bill.domain.BillReportDetailCriteria" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user
+    from t_bill_report_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,43 +91,43 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from t_user
+    from t_bill_report_detail
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_user
+    delete from t_bill_report_detail
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.eric.demo.api.user.domain.UserCriteria" >
-    delete from t_user
+  <delete id="deleteByExample" parameterType="com.eric.demo.web.bill.domain.BillReportDetailCriteria" >
+    delete from t_bill_report_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.eric.demo.api.user.domain.User" >
-    insert into t_user (id, username, nickname, 
-      password, is_del, created_by, 
+  <insert id="insert" parameterType="com.eric.demo.web.bill.domain.BillReportDetail" >
+    insert into t_bill_report_detail (id, report_id, category_id, 
+      total_amount, is_del, created_by, 
       created_date, last_modified_by, last_modified_date
       )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{reportId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, 
+      #{totalAmount,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
       #{createdDate,jdbcType=TIMESTAMP}, #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.eric.demo.api.user.domain.User" >
-    insert into t_user
+  <insert id="insertSelective" parameterType="com.eric.demo.web.bill.domain.BillReportDetail" >
+    insert into t_bill_report_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="reportId != null" >
+        report_id,
       </if>
-      <if test="nickname != null" >
-        nickname,
+      <if test="categoryId != null" >
+        category_id,
       </if>
-      <if test="password != null" >
-        password,
+      <if test="totalAmount != null" >
+        total_amount,
       </if>
       <if test="isDel != null" >
         is_del,
@@ -149,14 +149,14 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="reportId != null" >
+        #{reportId,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=INTEGER},
       </if>
       <if test="isDel != null" >
         #{isDel,jdbcType=INTEGER},
@@ -175,26 +175,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.eric.demo.api.user.domain.UserCriteria" resultType="java.lang.Integer" >
-    select count(*) from t_user
+  <select id="countByExample" parameterType="com.eric.demo.web.bill.domain.BillReportDetailCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_bill_report_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user
+    update t_bill_report_detail
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.reportId != null" >
+        report_id = #{record.reportId,jdbcType=VARCHAR},
       </if>
-      <if test="record.nickname != null" >
-        nickname = #{record.nickname,jdbcType=VARCHAR},
+      <if test="record.categoryId != null" >
+        category_id = #{record.categoryId,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=INTEGER},
       </if>
       <if test="record.isDel != null" >
         is_del = #{record.isDel,jdbcType=INTEGER},
@@ -217,11 +217,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user
+    update t_bill_report_detail
     set id = #{record.id,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
+      report_id = #{record.reportId,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=INTEGER},
       is_del = #{record.isDel,jdbcType=INTEGER},
       created_by = #{record.createdBy,jdbcType=VARCHAR},
       created_date = #{record.createdDate,jdbcType=TIMESTAMP},
@@ -231,17 +231,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eric.demo.api.user.domain.User" >
-    update t_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.eric.demo.web.bill.domain.BillReportDetail" >
+    update t_bill_report_detail
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="reportId != null" >
+        report_id = #{reportId,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=INTEGER},
       </if>
       <if test="isDel != null" >
         is_del = #{isDel,jdbcType=INTEGER},
@@ -261,11 +261,11 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eric.demo.api.user.domain.User" >
-    update t_user
-    set username = #{username,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.eric.demo.web.bill.domain.BillReportDetail" >
+    update t_bill_report_detail
+    set report_id = #{reportId,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=INTEGER},
       is_del = #{isDel,jdbcType=INTEGER},
       created_by = #{createdBy,jdbcType=VARCHAR},
       created_date = #{createdDate,jdbcType=TIMESTAMP},
@@ -273,13 +273,13 @@
       last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select resultMap="BaseResultMap" parameterType="com.eric.demo.api.user.domain.UserCriteria" id="selectByExampleWithRowbounds" >
+  <select resultMap="BaseResultMap" parameterType="com.eric.demo.web.bill.domain.BillReportDetailCriteria" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user
+    from t_bill_report_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -288,7 +288,7 @@
     </if>
   </select>
   <update id="logicDeleteById" parameterType="java.lang.String" >
-    update t_user 
+    update t_bill_report_detail 
  	set is_del=1 
  		where id=#{id,jdbcType=VARCHAR}
   </update>
@@ -297,14 +297,14 @@
       <if test="id != null" >
          AND id = #{id,jdbcType=VARCHAR}
       </if>
-      <if test="username != null" >
-         AND username = #{username,jdbcType=VARCHAR}
+      <if test="reportId != null" >
+         AND report_id = #{reportId,jdbcType=VARCHAR}
       </if>
-      <if test="nickname != null" >
-         AND nickname = #{nickname,jdbcType=VARCHAR}
+      <if test="categoryId != null" >
+         AND category_id = #{categoryId,jdbcType=VARCHAR}
       </if>
-      <if test="password != null" >
-         AND password = #{password,jdbcType=VARCHAR}
+      <if test="totalAmount != null" >
+         AND total_amount = #{totalAmount,jdbcType=INTEGER}
       </if>
       <if test="isDel != null" >
          AND is_del = #{isDel,jdbcType=INTEGER}
@@ -324,14 +324,14 @@
       <if test="myGreater_id != null" >
          AND id &gt; #{myGreater_id,jdbcType=VARCHAR}
       </if>
-      <if test="myGreater_username != null" >
-         AND username &gt; #{myGreater_username,jdbcType=VARCHAR}
+      <if test="myGreater_reportId != null" >
+         AND report_id &gt; #{myGreater_reportId,jdbcType=VARCHAR}
       </if>
-      <if test="myGreater_nickname != null" >
-         AND nickname &gt; #{myGreater_nickname,jdbcType=VARCHAR}
+      <if test="myGreater_categoryId != null" >
+         AND category_id &gt; #{myGreater_categoryId,jdbcType=VARCHAR}
       </if>
-      <if test="myGreater_password != null" >
-         AND password &gt; #{myGreater_password,jdbcType=VARCHAR}
+      <if test="myGreater_totalAmount != null" >
+         AND total_amount &gt; #{myGreater_totalAmount,jdbcType=INTEGER}
       </if>
       <if test="myGreater_isDel != null" >
          AND is_del &gt; #{myGreater_isDel,jdbcType=INTEGER}
@@ -351,14 +351,14 @@
       <if test="myLesser_id != null" >
          AND id &lt; #{myLesser_id,jdbcType=VARCHAR}
       </if>
-      <if test="myLesser_username != null" >
-         AND username &lt; #{myLesser_username,jdbcType=VARCHAR}
+      <if test="myLesser_reportId != null" >
+         AND report_id &lt; #{myLesser_reportId,jdbcType=VARCHAR}
       </if>
-      <if test="myLesser_nickname != null" >
-         AND nickname &lt; #{myLesser_nickname,jdbcType=VARCHAR}
+      <if test="myLesser_categoryId != null" >
+         AND category_id &lt; #{myLesser_categoryId,jdbcType=VARCHAR}
       </if>
-      <if test="myLesser_password != null" >
-         AND password &lt; #{myLesser_password,jdbcType=VARCHAR}
+      <if test="myLesser_totalAmount != null" >
+         AND total_amount &lt; #{myLesser_totalAmount,jdbcType=INTEGER}
       </if>
       <if test="myLesser_isDel != null" >
          AND is_del &lt; #{myLesser_isDel,jdbcType=INTEGER}
@@ -378,14 +378,14 @@
       <if test="myLike_id != null" >
          AND id like CONCAT('%', #{myLike_id,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="myLike_username != null" >
-         AND username like CONCAT('%', #{myLike_username,jdbcType=VARCHAR},'%' )
+      <if test="myLike_reportId != null" >
+         AND report_id like CONCAT('%', #{myLike_reportId,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="myLike_nickname != null" >
-         AND nickname like CONCAT('%', #{myLike_nickname,jdbcType=VARCHAR},'%' )
+      <if test="myLike_categoryId != null" >
+         AND category_id like CONCAT('%', #{myLike_categoryId,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="myLike_password != null" >
-         AND password like CONCAT('%', #{myLike_password,jdbcType=VARCHAR},'%' )
+      <if test="myLike_totalAmount != null" >
+         AND total_amount like CONCAT('%', #{myLike_totalAmount,jdbcType=INTEGER},'%' )
       </if>
       <if test="myLike_isDel != null" >
          AND is_del like CONCAT('%', #{myLike_isDel,jdbcType=INTEGER},'%' )
@@ -405,14 +405,14 @@
       <if test="myLikeStart_id != null" >
          AND id like CONCAT('%', #{myLikeStart_id,jdbcType=VARCHAR})
       </if>
-      <if test="myLikeStart_username != null" >
-         AND username like CONCAT('%', #{myLikeStart_username,jdbcType=VARCHAR})
+      <if test="myLikeStart_reportId != null" >
+         AND report_id like CONCAT('%', #{myLikeStart_reportId,jdbcType=VARCHAR})
       </if>
-      <if test="myLikeStart_nickname != null" >
-         AND nickname like CONCAT('%', #{myLikeStart_nickname,jdbcType=VARCHAR})
+      <if test="myLikeStart_categoryId != null" >
+         AND category_id like CONCAT('%', #{myLikeStart_categoryId,jdbcType=VARCHAR})
       </if>
-      <if test="myLikeStart_password != null" >
-         AND password like CONCAT('%', #{myLikeStart_password,jdbcType=VARCHAR})
+      <if test="myLikeStart_totalAmount != null" >
+         AND total_amount like CONCAT('%', #{myLikeStart_totalAmount,jdbcType=INTEGER})
       </if>
       <if test="myLikeStart_isDel != null" >
          AND is_del like CONCAT('%', #{myLikeStart_isDel,jdbcType=INTEGER})
@@ -432,14 +432,14 @@
       <if test="myLikeEnd_id != null" >
          AND id like CONCAT( #{myLikeEnd_id,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="myLikeEnd_username != null" >
-         AND username like CONCAT( #{myLikeEnd_username,jdbcType=VARCHAR},'%' )
+      <if test="myLikeEnd_reportId != null" >
+         AND report_id like CONCAT( #{myLikeEnd_reportId,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="myLikeEnd_nickname != null" >
-         AND nickname like CONCAT( #{myLikeEnd_nickname,jdbcType=VARCHAR},'%' )
+      <if test="myLikeEnd_categoryId != null" >
+         AND category_id like CONCAT( #{myLikeEnd_categoryId,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="myLikeEnd_password != null" >
-         AND password like CONCAT( #{myLikeEnd_password,jdbcType=VARCHAR},'%' )
+      <if test="myLikeEnd_totalAmount != null" >
+         AND total_amount like CONCAT( #{myLikeEnd_totalAmount,jdbcType=INTEGER},'%' )
       </if>
       <if test="myLikeEnd_isDel != null" >
          AND is_del like CONCAT( #{myLikeEnd_isDel,jdbcType=INTEGER},'%' )
@@ -459,14 +459,14 @@
       <if test="myIn_id != null" >
          AND id in <foreach item="item" index="index" collection="myIn_id" open="(" separator="," close=")"> #{item} </foreach>
       </if>
-      <if test="myIn_username != null" >
-         AND username in <foreach item="item" index="index" collection="myIn_username" open="(" separator="," close=")"> #{item} </foreach>
+      <if test="myIn_reportId != null" >
+         AND report_id in <foreach item="item" index="index" collection="myIn_reportId" open="(" separator="," close=")"> #{item} </foreach>
       </if>
-      <if test="myIn_nickname != null" >
-         AND nickname in <foreach item="item" index="index" collection="myIn_nickname" open="(" separator="," close=")"> #{item} </foreach>
+      <if test="myIn_categoryId != null" >
+         AND category_id in <foreach item="item" index="index" collection="myIn_categoryId" open="(" separator="," close=")"> #{item} </foreach>
       </if>
-      <if test="myIn_password != null" >
-         AND password in <foreach item="item" index="index" collection="myIn_password" open="(" separator="," close=")"> #{item} </foreach>
+      <if test="myIn_totalAmount != null" >
+         AND total_amount in <foreach item="item" index="index" collection="myIn_totalAmount" open="(" separator="," close=")"> #{item} </foreach>
       </if>
       <if test="myIn_isDel != null" >
          AND is_del in <foreach item="item" index="index" collection="myIn_isDel" open="(" separator="," close=")"> #{item} </foreach>
@@ -490,14 +490,14 @@
       <if test="id != null" >
          AND id = #{id,jdbcType=VARCHAR}
       </if>
-      <if test="username != null" >
-         AND username = #{username,jdbcType=VARCHAR}
+      <if test="reportId != null" >
+         AND report_id = #{reportId,jdbcType=VARCHAR}
       </if>
-      <if test="nickname != null" >
-         AND nickname = #{nickname,jdbcType=VARCHAR}
+      <if test="categoryId != null" >
+         AND category_id = #{categoryId,jdbcType=VARCHAR}
       </if>
-      <if test="password != null" >
-         AND password = #{password,jdbcType=VARCHAR}
+      <if test="totalAmount != null" >
+         AND total_amount = #{totalAmount,jdbcType=INTEGER}
       </if>
       <if test="isDel != null" >
          AND is_del = #{isDel,jdbcType=INTEGER}
@@ -516,16 +516,14 @@
       </if>
     </trim>
   </sql>
-  <select id="findList" parameterType="map" resultMap="BaseResultMap">
+  <select id="findList" parameterType="map" resultMap="BaseResultMap" >
       select <include refid='Base_Column_List' /> 
-	 from t_user 
+	 from t_bill_report_detail 
  	 <include refid='Base_Query_Map_Condition' />
   </select>
-  <!--useCache="false"-->
-  <select id="findByVo" parameterType="com.eric.demo.api.user.domain.User" resultMap="BaseResultMap"   >
+  <select id="findByVo" parameterType="com.eric.demo.web.bill.domain.BillReportDetail" resultMap="BaseResultMap" >
       select <include refid='Base_Column_List' /> 
-	 from t_user 
+	 from t_bill_report_detail 
  	 <include refid='Base_Query_Vo_Condition' />
   </select>
-  <cache/>
 </mapper>

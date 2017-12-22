@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eric.demo.web.bill.dao.BillReportTaskDao" >
+  <resultMap id="BaseResultMap" type="com.eric.demo.web.bill.domain.BillReportTask" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="send_status" property="sendStatus" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="last_modified_by" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="last_modified_date" property="lastModifiedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, start_time, end_time, send_status, status, total_amount, is_del, created_by, 
+    created_date, last_modified_by, last_modified_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eric.demo.web.bill.domain.BillReportTaskCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_bill_report_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_bill_report_task
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_bill_report_task
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eric.demo.web.bill.domain.BillReportTaskCriteria" >
+    delete from t_bill_report_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eric.demo.web.bill.domain.BillReportTask" >
+    insert into t_bill_report_task (id, uid, start_time, 
+      end_time, send_status, status, 
+      total_amount, is_del, created_by, 
+      created_date, last_modified_by, last_modified_date
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{sendStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{totalAmount,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eric.demo.web.bill.domain.BillReportTask" >
+    insert into t_bill_report_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="sendStatus != null" >
+        send_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="lastModifiedBy != null" >
+        last_modified_by,
+      </if>
+      <if test="lastModifiedDate != null" >
+        last_modified_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendStatus != null" >
+        #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedBy != null" >
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null" >
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eric.demo.web.bill.domain.BillReportTaskCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_bill_report_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_bill_report_task
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sendStatus != null" >
+        send_status = #{record.sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdBy != null" >
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDate != null" >
+        created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifiedBy != null" >
+        last_modified_by = #{record.lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifiedDate != null" >
+        last_modified_date = #{record.lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_bill_report_task
+    set id = #{record.id,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      send_status = #{record.sendStatus,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      total_amount = #{record.totalAmount,jdbcType=INTEGER},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      created_by = #{record.createdBy,jdbcType=VARCHAR},
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      last_modified_by = #{record.lastModifiedBy,jdbcType=VARCHAR},
+      last_modified_date = #{record.lastModifiedDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eric.demo.web.bill.domain.BillReportTask" >
+    update t_bill_report_task
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendStatus != null" >
+        send_status = #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedBy != null" >
+        last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedDate != null" >
+        last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eric.demo.web.bill.domain.BillReportTask" >
+    update t_bill_report_task
+    set uid = #{uid,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      send_status = #{sendStatus,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      total_amount = #{totalAmount,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
+      last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.eric.demo.web.bill.domain.BillReportTaskCriteria" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_bill_report_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <update id="logicDeleteById" parameterType="java.lang.String" >
+    update t_bill_report_task 
+ 	set is_del=1 
+ 		where id=#{id,jdbcType=VARCHAR}
+  </update>
+  <sql id="Base_Query_Map_Condition" >
+    <trim prefix="where" prefixOverrides="and | or" >
+      <if test="id != null" >
+         AND id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="uid != null" >
+         AND uid = #{uid,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null" >
+         AND start_time = #{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null" >
+         AND end_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="sendStatus != null" >
+         AND send_status = #{sendStatus,jdbcType=INTEGER}
+      </if>
+      <if test="status != null" >
+         AND status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="totalAmount != null" >
+         AND total_amount = #{totalAmount,jdbcType=INTEGER}
+      </if>
+      <if test="isDel != null" >
+         AND is_del = #{isDel,jdbcType=INTEGER}
+      </if>
+      <if test="createdBy != null" >
+         AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null" >
+         AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastModifiedBy != null" >
+         AND last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastModifiedDate != null" >
+         AND last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myGreater_id != null" >
+         AND id &gt; #{myGreater_id,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_uid != null" >
+         AND uid &gt; #{myGreater_uid,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_startTime != null" >
+         AND start_time &gt; #{myGreater_startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myGreater_endTime != null" >
+         AND end_time &gt; #{myGreater_endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myGreater_sendStatus != null" >
+         AND send_status &gt; #{myGreater_sendStatus,jdbcType=INTEGER}
+      </if>
+      <if test="myGreater_status != null" >
+         AND status &gt; #{myGreater_status,jdbcType=INTEGER}
+      </if>
+      <if test="myGreater_totalAmount != null" >
+         AND total_amount &gt; #{myGreater_totalAmount,jdbcType=INTEGER}
+      </if>
+      <if test="myGreater_isDel != null" >
+         AND is_del &gt; #{myGreater_isDel,jdbcType=INTEGER}
+      </if>
+      <if test="myGreater_createdBy != null" >
+         AND created_by &gt; #{myGreater_createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_createdDate != null" >
+         AND created_date &gt; #{myGreater_createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myGreater_lastModifiedBy != null" >
+         AND last_modified_by &gt; #{myGreater_lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_lastModifiedDate != null" >
+         AND last_modified_date &gt; #{myGreater_lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLesser_id != null" >
+         AND id &lt; #{myLesser_id,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_uid != null" >
+         AND uid &lt; #{myLesser_uid,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_startTime != null" >
+         AND start_time &lt; #{myLesser_startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLesser_endTime != null" >
+         AND end_time &lt; #{myLesser_endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLesser_sendStatus != null" >
+         AND send_status &lt; #{myLesser_sendStatus,jdbcType=INTEGER}
+      </if>
+      <if test="myLesser_status != null" >
+         AND status &lt; #{myLesser_status,jdbcType=INTEGER}
+      </if>
+      <if test="myLesser_totalAmount != null" >
+         AND total_amount &lt; #{myLesser_totalAmount,jdbcType=INTEGER}
+      </if>
+      <if test="myLesser_isDel != null" >
+         AND is_del &lt; #{myLesser_isDel,jdbcType=INTEGER}
+      </if>
+      <if test="myLesser_createdBy != null" >
+         AND created_by &lt; #{myLesser_createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_createdDate != null" >
+         AND created_date &lt; #{myLesser_createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLesser_lastModifiedBy != null" >
+         AND last_modified_by &lt; #{myLesser_lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_lastModifiedDate != null" >
+         AND last_modified_date &lt; #{myLesser_lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="myLike_id != null" >
+         AND id like CONCAT('%', #{myLike_id,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_uid != null" >
+         AND uid like CONCAT('%', #{myLike_uid,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_startTime != null" >
+         AND start_time like CONCAT('%', #{myLike_startTime,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLike_endTime != null" >
+         AND end_time like CONCAT('%', #{myLike_endTime,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLike_sendStatus != null" >
+         AND send_status like CONCAT('%', #{myLike_sendStatus,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLike_status != null" >
+         AND status like CONCAT('%', #{myLike_status,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLike_totalAmount != null" >
+         AND total_amount like CONCAT('%', #{myLike_totalAmount,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLike_isDel != null" >
+         AND is_del like CONCAT('%', #{myLike_isDel,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLike_createdBy != null" >
+         AND created_by like CONCAT('%', #{myLike_createdBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_createdDate != null" >
+         AND created_date like CONCAT('%', #{myLike_createdDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLike_lastModifiedBy != null" >
+         AND last_modified_by like CONCAT('%', #{myLike_lastModifiedBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_lastModifiedDate != null" >
+         AND last_modified_date like CONCAT('%', #{myLike_lastModifiedDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLikeStart_id != null" >
+         AND id like CONCAT('%', #{myLikeStart_id,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_uid != null" >
+         AND uid like CONCAT('%', #{myLikeStart_uid,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_startTime != null" >
+         AND start_time like CONCAT('%', #{myLikeStart_startTime,jdbcType=TIMESTAMP})
+      </if>
+      <if test="myLikeStart_endTime != null" >
+         AND end_time like CONCAT('%', #{myLikeStart_endTime,jdbcType=TIMESTAMP})
+      </if>
+      <if test="myLikeStart_sendStatus != null" >
+         AND send_status like CONCAT('%', #{myLikeStart_sendStatus,jdbcType=INTEGER})
+      </if>
+      <if test="myLikeStart_status != null" >
+         AND status like CONCAT('%', #{myLikeStart_status,jdbcType=INTEGER})
+      </if>
+      <if test="myLikeStart_totalAmount != null" >
+         AND total_amount like CONCAT('%', #{myLikeStart_totalAmount,jdbcType=INTEGER})
+      </if>
+      <if test="myLikeStart_isDel != null" >
+         AND is_del like CONCAT('%', #{myLikeStart_isDel,jdbcType=INTEGER})
+      </if>
+      <if test="myLikeStart_createdBy != null" >
+         AND created_by like CONCAT('%', #{myLikeStart_createdBy,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_createdDate != null" >
+         AND created_date like CONCAT('%', #{myLikeStart_createdDate,jdbcType=TIMESTAMP})
+      </if>
+      <if test="myLikeStart_lastModifiedBy != null" >
+         AND last_modified_by like CONCAT('%', #{myLikeStart_lastModifiedBy,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_lastModifiedDate != null" >
+         AND last_modified_date like CONCAT('%', #{myLikeStart_lastModifiedDate,jdbcType=TIMESTAMP})
+      </if>
+      <if test="myLikeEnd_id != null" >
+         AND id like CONCAT( #{myLikeEnd_id,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_uid != null" >
+         AND uid like CONCAT( #{myLikeEnd_uid,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_startTime != null" >
+         AND start_time like CONCAT( #{myLikeEnd_startTime,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLikeEnd_endTime != null" >
+         AND end_time like CONCAT( #{myLikeEnd_endTime,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLikeEnd_sendStatus != null" >
+         AND send_status like CONCAT( #{myLikeEnd_sendStatus,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLikeEnd_status != null" >
+         AND status like CONCAT( #{myLikeEnd_status,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLikeEnd_totalAmount != null" >
+         AND total_amount like CONCAT( #{myLikeEnd_totalAmount,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLikeEnd_isDel != null" >
+         AND is_del like CONCAT( #{myLikeEnd_isDel,jdbcType=INTEGER},'%' )
+      </if>
+      <if test="myLikeEnd_createdBy != null" >
+         AND created_by like CONCAT( #{myLikeEnd_createdBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_createdDate != null" >
+         AND created_date like CONCAT( #{myLikeEnd_createdDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myLikeEnd_lastModifiedBy != null" >
+         AND last_modified_by like CONCAT( #{myLikeEnd_lastModifiedBy,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_lastModifiedDate != null" >
+         AND last_modified_date like CONCAT( #{myLikeEnd_lastModifiedDate,jdbcType=TIMESTAMP},'%' )
+      </if>
+      <if test="myIn_id != null" >
+         AND id in <foreach item="item" index="index" collection="myIn_id" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_uid != null" >
+         AND uid in <foreach item="item" index="index" collection="myIn_uid" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_startTime != null" >
+         AND start_time in <foreach item="item" index="index" collection="myIn_startTime" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_endTime != null" >
+         AND end_time in <foreach item="item" index="index" collection="myIn_endTime" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_sendStatus != null" >
+         AND send_status in <foreach item="item" index="index" collection="myIn_sendStatus" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_status != null" >
+         AND status in <foreach item="item" index="index" collection="myIn_status" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_totalAmount != null" >
+         AND total_amount in <foreach item="item" index="index" collection="myIn_totalAmount" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_isDel != null" >
+         AND is_del in <foreach item="item" index="index" collection="myIn_isDel" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_createdBy != null" >
+         AND created_by in <foreach item="item" index="index" collection="myIn_createdBy" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_createdDate != null" >
+         AND created_date in <foreach item="item" index="index" collection="myIn_createdDate" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_lastModifiedBy != null" >
+         AND last_modified_by in <foreach item="item" index="index" collection="myIn_lastModifiedBy" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_lastModifiedDate != null" >
+         AND last_modified_date in <foreach item="item" index="index" collection="myIn_lastModifiedDate" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Query_Vo_Condition" >
+    <trim prefix="where" prefixOverrides="and | or" >
+      <if test="id != null" >
+         AND id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="uid != null" >
+         AND uid = #{uid,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null" >
+         AND start_time = #{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null" >
+         AND end_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="sendStatus != null" >
+         AND send_status = #{sendStatus,jdbcType=INTEGER}
+      </if>
+      <if test="status != null" >
+         AND status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="totalAmount != null" >
+         AND total_amount = #{totalAmount,jdbcType=INTEGER}
+      </if>
+      <if test="isDel != null" >
+         AND is_del = #{isDel,jdbcType=INTEGER}
+      </if>
+      <if test="createdBy != null" >
+         AND created_by = #{createdBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createdDate != null" >
+         AND created_date = #{createdDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastModifiedBy != null" >
+         AND last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR}
+      </if>
+      <if test="lastModifiedDate != null" >
+         AND last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </sql>
+  <select id="findList" parameterType="map" resultMap="BaseResultMap" >
+      select <include refid='Base_Column_List' /> 
+	 from t_bill_report_task 
+ 	 <include refid='Base_Query_Map_Condition' />
+  </select>
+  <select id="findByVo" parameterType="com.eric.demo.web.bill.domain.BillReportTask" resultMap="BaseResultMap" >
+      select <include refid='Base_Column_List' /> 
+	 from t_bill_report_task 
+ 	 <include refid='Base_Query_Vo_Condition' />
+  </select>
+</mapper>
