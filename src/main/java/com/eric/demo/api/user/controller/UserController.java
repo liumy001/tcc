@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.eric.demo.api.user.cache.UserCache;
+import com.eric.demo.commons.annotation.CommonLog;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;

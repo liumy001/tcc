@@ -3,6 +3,7 @@ package com.eric.demo.api.user.cache;
 import com.eric.demo.api.user.dto.UserCacheDto;
 import com.eric.demo.api.user.service.UserService;
 import com.eric.demo.cache.CommonCache;
+import com.eric.demo.commons.annotation.CommonLog;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

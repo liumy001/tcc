@@ -3,6 +3,7 @@ package com.eric.demo.api.user.service.impl;
 import java.util.List;
 
 import com.eric.demo.api.user.dao.UserDao;
+import com.eric.demo.commons.annotation.CommonLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserCriteria>
     private UserDao userDao;
 
     @Override
+    @CommonLog
     public User findOneByUsername(String username) {
         Assert.notNull(username);
         UserCriteria userCriteria = new UserCriteria();
@@ -35,12 +37,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserCriteria>
     }
 
     @Override
+    @CommonLog
     public void changePassword(String newPassword) {
         Assert.notNull(newPassword);
 
     }
 
     @Override
+    @CommonLog
     protected BaseDao<User, UserCriteria, String> getDao() {
         return userDao;
     }
