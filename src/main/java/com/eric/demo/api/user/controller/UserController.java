@@ -1,5 +1,6 @@
 package com.eric.demo.api.user.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,9 @@ public class UserController {
     @Autowired
     private UserCache userCache;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * consumes= MediaType.MULTIPART_FORM_DATA_VALUE
      * GET /users -> get all the users
@@ -50,18 +54,22 @@ public class UserController {
     /**
      * POST /users -> create a new user
      */
-/*    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<?> create(@Valid @RequestBody User userDto,
-                                    HttpServletRequest request) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> create() {
+        User userDto=new User();
+        userDto.setUsername("1");
         User user = userService.findOneByUsername(userDto.getUsername());
         if (user != null) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.TEXT_PLAIN)
                     .body("username already in use");
         }
+        userDto.setPassword("1");
+        userDto.setNickname("2");
+        userDto.setCreatedDate(new Date());
         userService.create(userDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }*/
+    }
 
 
 }
