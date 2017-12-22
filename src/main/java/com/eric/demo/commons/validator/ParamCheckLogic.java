@@ -127,7 +127,7 @@ public class ParamCheckLogic {
             Iterator<ConstraintViolation<T>> iterator = constraintViolationSet.iterator();
             while (iterator.hasNext()) {
                 ConstraintViolation<T> constraint = iterator.next();
-                dto.setErrCode(MessageSourceUtil.getIntMessage(messageSource, BaseConst.ERROR_CODE));
+                dto.setErrCode(1);
                 dto.putValue(constraint.getPropertyPath().toString(), constraint.getMessage());
                 errorMsg.append(constraint.getMessage()).append(",");
             }

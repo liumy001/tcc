@@ -32,7 +32,7 @@ public class HibernateValidatorConfig {
     @Bean
     public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource(){
         ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource=new ReloadableResourceBundleMessageSource();
-        reloadableResourceBundleMessageSource.setBasenames("classpath:message/validator.properties");
+        reloadableResourceBundleMessageSource.setBasenames("classpath:message/validator.properties","classpath:org/hibernate/validator/ValidationMessages","classpath:message/fw-order-message.properties");
         reloadableResourceBundleMessageSource.setDefaultEncoding("utf-8");
         reloadableResourceBundleMessageSource.setUseCodeAsDefaultMessage(false);
         reloadableResourceBundleMessageSource.setCacheSeconds(60);
