@@ -15,7 +15,7 @@ public class UserCache extends CommonCache<String, UserCacheDto> {
 
     @Override
     public UserCacheDto execute(String key) throws Exception {
-        setTime(10);
+        setTime(60*5);
         return get("uuu-", key, UserCacheDto.class, new Fun<String, UserCacheDto>() {
             @Override
             public UserCacheDto get(String key) throws Exception {

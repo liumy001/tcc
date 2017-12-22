@@ -45,7 +45,7 @@ public class UserController {
      */
     @RequestMapping(value = "/users")
     public ResponseEntity<List<User>> getAll() throws Exception {
-        //PageHelper.startPage(1,2);
+        PageHelper.startPage(1,5);
         Map<String, Object> map = Maps.newHashMap();
         return new ResponseEntity<>(userCache.execute("findAllUser").getUserList(), HttpStatus.OK);
     }
