@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @数表名称 t_user
- * @开发日期 2017-12-22 15:46:12
+ * @开发日期 2017-12-22 16:16:07
  * @开发作者 by:liumy 
  */
 public class UserCriteria extends AbstractCriteria {
@@ -391,6 +391,146 @@ public class UserCriteria extends AbstractCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andEmailIsNull() {
+            addCriterion("email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIsNotNull() {
+            addCriterion("email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailEqualTo(String value) {
+            addCriterion("email =", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotEqualTo(String value) {
+            addCriterion("email <>", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailGreaterThan(String value) {
+            addCriterion("email >", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("email >=", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLessThan(String value) {
+            addCriterion("email <", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLessThanOrEqualTo(String value) {
+            addCriterion("email <=", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLike(String value) {
+            addCriterion("email like", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotLike(String value) {
+            addCriterion("email not like", value, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailIn(List<String> values) {
+            addCriterion("email in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotIn(List<String> values) {
+            addCriterion("email not in", values, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailBetween(String value1, String value2) {
+            addCriterion("email between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailNotBetween(String value1, String value2) {
+            addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailIsNull() {
+            addCriterion("ext_email is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailIsNotNull() {
+            addCriterion("ext_email is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailEqualTo(String value) {
+            addCriterion("ext_email =", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailNotEqualTo(String value) {
+            addCriterion("ext_email <>", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailGreaterThan(String value) {
+            addCriterion("ext_email >", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailGreaterThanOrEqualTo(String value) {
+            addCriterion("ext_email >=", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailLessThan(String value) {
+            addCriterion("ext_email <", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailLessThanOrEqualTo(String value) {
+            addCriterion("ext_email <=", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailLike(String value) {
+            addCriterion("ext_email like", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailNotLike(String value) {
+            addCriterion("ext_email not like", value, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailIn(List<String> values) {
+            addCriterion("ext_email in", values, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailNotIn(List<String> values) {
+            addCriterion("ext_email not in", values, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailBetween(String value1, String value2) {
+            addCriterion("ext_email between", value1, value2, "extEmail");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailNotBetween(String value1, String value2) {
+            addCriterion("ext_email not between", value1, value2, "extEmail");
+            return (Criteria) this;
+        }
+
         public Criteria andIsDelIsNull() {
             addCriterion("is_del is null");
             return (Criteria) this;
@@ -728,6 +868,16 @@ public class UserCriteria extends AbstractCriteria {
 
         public Criteria andPasswordLikeInsensitive(String value) {
             addCriterion("upper(password) like", value.toUpperCase(), "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmailLikeInsensitive(String value) {
+            addCriterion("upper(email) like", value.toUpperCase(), "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtEmailLikeInsensitive(String value) {
+            addCriterion("upper(ext_email) like", value.toUpperCase(), "extEmail");
             return (Criteria) this;
         }
 

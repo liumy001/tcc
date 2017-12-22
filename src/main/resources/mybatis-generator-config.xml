@@ -74,6 +74,6 @@
 		</javaClientGenerator>
 
 		<!-- 配置表信息 -->
-		<table schema="Boot" tableName="t_category" domainObjectName="Category" />
+		<table schema="Boot" tableName="t_user" domainObjectName="User" />
 	</context>
 </generatorConfiguration>  

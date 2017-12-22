@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @数表名称 t_user
- * @开发日期 2017-12-22 15:46:12
+ * @开发日期 2017-12-22 16:16:07
  * @开发作者 by:liumy 
  */
 public class User extends AbstractAuditingEntity implements Serializable {
@@ -17,6 +17,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String nickName;
 
     private String password;
+
+    private String email;
+
+    private String extEmail;
 
     private Integer isDel;
 
@@ -60,6 +64,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getExtEmail() {
+        return extEmail;
+    }
+
+    public void setExtEmail(String extEmail) {
+        this.extEmail = extEmail == null ? null : extEmail.trim();
     }
 
     public Integer getIsDel() {
@@ -112,6 +132,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
         sb.append(", userName=").append(userName);
         sb.append(", nickName=").append(nickName);
         sb.append(", password=").append(password);
+        sb.append(", email=").append(email);
+        sb.append(", extEmail=").append(extEmail);
         sb.append(", isDel=").append(isDel);
         sb.append(", createdBy=").append(createdBy);
         sb.append(", createdDate=").append(createdDate);
@@ -138,6 +160,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
             && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getExtEmail() == null ? other.getExtEmail() == null : this.getExtEmail().equals(other.getExtEmail()))
             && (this.getIsDel() == null ? other.getIsDel() == null : this.getIsDel().equals(other.getIsDel()))
             && (this.getCreatedBy() == null ? other.getCreatedBy() == null : this.getCreatedBy().equals(other.getCreatedBy()))
             && (this.getCreatedDate() == null ? other.getCreatedDate() == null : this.getCreatedDate().equals(other.getCreatedDate()))
@@ -153,6 +177,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
         result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
         result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getExtEmail() == null) ? 0 : getExtEmail().hashCode());
         result = prime * result + ((getIsDel() == null) ? 0 : getIsDel().hashCode());
         result = prime * result + ((getCreatedBy() == null) ? 0 : getCreatedBy().hashCode());
         result = prime * result + ((getCreatedDate() == null) ? 0 : getCreatedDate().hashCode());

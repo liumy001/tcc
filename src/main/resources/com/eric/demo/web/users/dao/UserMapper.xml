@@ -6,6 +6,8 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="ext_email" property="extEmail" jdbcType="VARCHAR" />
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
     <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
@@ -71,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_name, nick_name, password, is_del, created_by, created_date, last_modified_by, 
-    last_modified_date
+    id, user_name, nick_name, password, email, ext_email, is_del, created_by, created_date, 
+    last_modified_by, last_modified_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eric.demo.web.users.domain.UserCriteria" >
     select
@@ -106,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.eric.demo.web.users.domain.User" >
     insert into t_user (id, user_name, nick_name, 
-      password, is_del, created_by, 
-      created_date, last_modified_by, last_modified_date
-      )
+      password, email, ext_email, 
+      is_del, created_by, created_date, 
+      last_modified_by, last_modified_date)
     values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
-      #{createdDate,jdbcType=TIMESTAMP}, #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP}
-      )
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{extEmail,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.eric.demo.web.users.domain.User" >
     insert into t_user
@@ -128,6 +130,12 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="extEmail != null" >
+        ext_email,
       </if>
       <if test="isDel != null" >
         is_del,
@@ -157,6 +165,12 @@
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="extEmail != null" >
+        #{extEmail,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
         #{isDel,jdbcType=INTEGER},
@@ -196,6 +210,12 @@
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extEmail != null" >
+        ext_email = #{record.extEmail,jdbcType=VARCHAR},
+      </if>
       <if test="record.isDel != null" >
         is_del = #{record.isDel,jdbcType=INTEGER},
       </if>
@@ -222,6 +242,8 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      ext_email = #{record.extEmail,jdbcType=VARCHAR},
       is_del = #{record.isDel,jdbcType=INTEGER},
       created_by = #{record.createdBy,jdbcType=VARCHAR},
       created_date = #{record.createdDate,jdbcType=TIMESTAMP},
@@ -242,6 +264,12 @@
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="extEmail != null" >
+        ext_email = #{extEmail,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
         is_del = #{isDel,jdbcType=INTEGER},
@@ -266,6 +294,8 @@
     set user_name = #{userName,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      ext_email = #{extEmail,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=INTEGER},
       created_by = #{createdBy,jdbcType=VARCHAR},
       created_date = #{createdDate,jdbcType=TIMESTAMP},
@@ -306,6 +336,12 @@
       <if test="password != null" >
          AND password = #{password,jdbcType=VARCHAR}
       </if>
+      <if test="email != null" >
+         AND email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="extEmail != null" >
+         AND ext_email = #{extEmail,jdbcType=VARCHAR}
+      </if>
       <if test="isDel != null" >
          AND is_del = #{isDel,jdbcType=INTEGER}
       </if>
@@ -332,6 +368,12 @@
       </if>
       <if test="myGreater_password != null" >
          AND password &gt; #{myGreater_password,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_email != null" >
+         AND email &gt; #{myGreater_email,jdbcType=VARCHAR}
+      </if>
+      <if test="myGreater_extEmail != null" >
+         AND ext_email &gt; #{myGreater_extEmail,jdbcType=VARCHAR}
       </if>
       <if test="myGreater_isDel != null" >
          AND is_del &gt; #{myGreater_isDel,jdbcType=INTEGER}
@@ -360,6 +402,12 @@
       <if test="myLesser_password != null" >
          AND password &lt; #{myLesser_password,jdbcType=VARCHAR}
       </if>
+      <if test="myLesser_email != null" >
+         AND email &lt; #{myLesser_email,jdbcType=VARCHAR}
+      </if>
+      <if test="myLesser_extEmail != null" >
+         AND ext_email &lt; #{myLesser_extEmail,jdbcType=VARCHAR}
+      </if>
       <if test="myLesser_isDel != null" >
          AND is_del &lt; #{myLesser_isDel,jdbcType=INTEGER}
       </if>
@@ -386,6 +434,12 @@
       </if>
       <if test="myLike_password != null" >
          AND password like CONCAT('%', #{myLike_password,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_email != null" >
+         AND email like CONCAT('%', #{myLike_email,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLike_extEmail != null" >
+         AND ext_email like CONCAT('%', #{myLike_extEmail,jdbcType=VARCHAR},'%' )
       </if>
       <if test="myLike_isDel != null" >
          AND is_del like CONCAT('%', #{myLike_isDel,jdbcType=INTEGER},'%' )
@@ -414,6 +468,12 @@
       <if test="myLikeStart_password != null" >
          AND password like CONCAT('%', #{myLikeStart_password,jdbcType=VARCHAR})
       </if>
+      <if test="myLikeStart_email != null" >
+         AND email like CONCAT('%', #{myLikeStart_email,jdbcType=VARCHAR})
+      </if>
+      <if test="myLikeStart_extEmail != null" >
+         AND ext_email like CONCAT('%', #{myLikeStart_extEmail,jdbcType=VARCHAR})
+      </if>
       <if test="myLikeStart_isDel != null" >
          AND is_del like CONCAT('%', #{myLikeStart_isDel,jdbcType=INTEGER})
       </if>
@@ -441,6 +501,12 @@
       <if test="myLikeEnd_password != null" >
          AND password like CONCAT( #{myLikeEnd_password,jdbcType=VARCHAR},'%' )
       </if>
+      <if test="myLikeEnd_email != null" >
+         AND email like CONCAT( #{myLikeEnd_email,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="myLikeEnd_extEmail != null" >
+         AND ext_email like CONCAT( #{myLikeEnd_extEmail,jdbcType=VARCHAR},'%' )
+      </if>
       <if test="myLikeEnd_isDel != null" >
          AND is_del like CONCAT( #{myLikeEnd_isDel,jdbcType=INTEGER},'%' )
       </if>
@@ -467,6 +533,12 @@
       </if>
       <if test="myIn_password != null" >
          AND password in <foreach item="item" index="index" collection="myIn_password" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_email != null" >
+         AND email in <foreach item="item" index="index" collection="myIn_email" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+      <if test="myIn_extEmail != null" >
+         AND ext_email in <foreach item="item" index="index" collection="myIn_extEmail" open="(" separator="," close=")"> #{item} </foreach>
       </if>
       <if test="myIn_isDel != null" >
          AND is_del in <foreach item="item" index="index" collection="myIn_isDel" open="(" separator="," close=")"> #{item} </foreach>
@@ -498,6 +570,12 @@
       </if>
       <if test="password != null" >
          AND password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null" >
+         AND email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="extEmail != null" >
+         AND ext_email = #{extEmail,jdbcType=VARCHAR}
       </if>
       <if test="isDel != null" >
          AND is_del = #{isDel,jdbcType=INTEGER}
