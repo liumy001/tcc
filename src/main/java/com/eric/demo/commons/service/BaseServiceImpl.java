@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;*/
+import com.eric.demo.commons.annotation.CommonLog;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public T create(T entity) {
         Assert.notNull(entity);
         String id = entity.getId() == null ? IdGen.uuid() : entity.getId()
@@ -51,6 +53,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public List<T> create(List<T> entities) {
         Assert.notEmpty(entities);
         List<T> list = new ArrayList<T>();
@@ -61,6 +64,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public T update(T entity) {
         Assert.notNull(entity);
         T existing = getDao().selectByPrimaryKey(entity.getId());
@@ -70,6 +74,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public List<T> update(List<T> entities) {
         Assert.notEmpty(entities);
         List<T> list = new ArrayList<T>();
@@ -80,6 +85,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public T save(T entity) {
         Assert.notNull(entity);
         if (entity.getId() == null) {
@@ -91,6 +97,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public List<T> save(List<T> entities) {
         Assert.notEmpty(entities);
         List<T> list = new ArrayList<T>();
@@ -101,6 +108,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public T findOne(String id) {
         Assert.notNull(id);
@@ -108,6 +116,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public boolean exists(String id) {
         Assert.notNull(id);
@@ -115,24 +124,28 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public long count() {
         return getDao().countByExample(null);
     }
 
     @Override
+    @CommonLog
     public void delete(String id) {
         Assert.notNull(id);
         getDao().deleteByPrimaryKey(id);
     }
 
     @Override
+    @CommonLog
     public void delete(T entity) {
         Assert.notNull(entity);
         getDao().deleteByPrimaryKey(entity.getId());
     }
 
     @Override
+    @CommonLog
     public void delete(List<T> entities) {
         Assert.notEmpty(entities);
         for (T t : entities) {
@@ -141,17 +154,20 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public void deleteAll() {
         delete(findAll());
     }
 
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> findAll() {
         return getDao().selectByExample(null);
     }
 
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> search(E criteria) {
         Assert.notNull(criteria);
@@ -159,18 +175,22 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     }
 
     @Override
+    @CommonLog
     public int logicDeleteById(String id) {
         Assert.notNull(id);
         return getDao().logicDeleteById(id);
     }
 
+
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> findList(Map<String, Object> paramMap) {
         return getDao().findList(paramMap);
     }
 
     @Override
+    @CommonLog
     @Transactional(propagation= Propagation.NOT_SUPPORTED)
     public List<T> findByVo(T entity) {
         return getDao().findByVo(entity);

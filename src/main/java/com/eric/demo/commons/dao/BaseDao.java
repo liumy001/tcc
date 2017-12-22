@@ -1,7 +1,10 @@
 package com.eric.demo.commons.dao;
 
+import com.eric.demo.commons.annotation.CommonLog;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +36,7 @@ public interface BaseDao<T extends Serializable, E, ID extends Serializable> {
 
     int logicDeleteById(ID id);
 
+    @CommonLog
     List<T> findList(Map<String, Object> paramMap);
 
     List<T> findByVo(T entity);

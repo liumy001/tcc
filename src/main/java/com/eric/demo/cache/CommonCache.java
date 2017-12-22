@@ -2,6 +2,7 @@ package com.eric.demo.cache;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.eric.demo.commons.annotation.CommonLog;
 import com.eric.demo.commons.util.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ public abstract class CommonCache<T, K> {
     //是否使用缓存设置
     private Boolean useCache = true;
 
+    @CommonLog
     protected K get(String keyPrefix, T key, Class<K> type, Fun<T, K> fun) throws Exception {
         //标记本次为在redis取数据超时，此时调用接口取数据
         K value = null;
