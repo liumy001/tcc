@@ -20,14 +20,14 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
-/*
+
     @Autowired
-    private ParamCheckLogic paramCheckLogic;*/
+    private ParamCheckLogic paramCheckLogic;
 
     @RequestMapping("login")
     @ResponseBody
     public String login(HttpSession session, UserDto userDto) {
-        //DataTransferObject dataTransferObject= paramCheckLogic.checkObjParamValidate(userDto);
+        DataTransferObject dataTransferObject= paramCheckLogic.checkObjParamValidate(userDto);
         return null;
     }
 
