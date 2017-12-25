@@ -3,14 +3,23 @@ package test;
 import com.eric.demo.Application;
 import com.eric.demo.commons.util.HttpClientUtil;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import javax.mail.internet.MimeMessage;
 
 @RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
 @SpringBootTest(classes = Application.class) // 指定我们SpringBoot工程的Application启动类
 @WebAppConfiguration // 由于是Web项目，Junit需要模拟ServletContext，因此我们需要给我们的测试类加上@WebAppConfiguration
 public class Test {
+
+    @Autowired
+    private JavaMailSender mailSender;
 
    /* @Autowired
     private UserService userService;
@@ -42,7 +51,18 @@ public class Test {
         Thread.sleep(Integer.MAX_VALUE);
     }
 
+    @org.junit.Test
     public void test2() throws Exception {
+        //true表示需要创建一个multipart message
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom("liumingyue0203@163.com");
+        helper.setTo("407231704@qq.com");
+        helper.setSubject("111");
+        //html 加如参数 true
+        helper.setText("1111");
+
+        mailSender.send(message);
 
     }
 }

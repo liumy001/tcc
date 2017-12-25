@@ -116,7 +116,7 @@ public class ParamCheckLogic {
      * @return
      */
     public <T> DataTransferObject checkObjParamValidate(T t) {
-        DataTransferObject dto = null;
+        DataTransferObject dto = new DataTransferObject();
         //参数是否为空
         if (Check.NuNObj(t)) {
             dto = new DataTransferObject();

@@ -64,4 +64,6 @@ public abstract class BaseConst {
     public static final String NATIONAL = "QG";
 
     public static final String YP_HOME_PAGE_INFO_KEY="yp_home_page_info_key";
+
+    public static final String USER_SESSION_KEY="TCC-USER_SESSION_KEY";
 }
