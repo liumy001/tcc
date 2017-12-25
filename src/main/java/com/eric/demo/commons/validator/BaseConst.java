@@ -21,9 +21,10 @@ public abstract class BaseConst {
     /**
      * 私有化构造
      */
-    public BaseConst(){
+    public BaseConst() {
 
     }
+
     /**
      * 通用错误消息，返回:服务错误
      */
@@ -52,7 +53,7 @@ public abstract class BaseConst {
     /**
      * BeanUtils.copyProperties 不copy的属性
      */
-    public static final String[] NOT_COPY_FIELDS = new String[] {"id", "logicCode", "workStatus", "orderStatus", "createTime", "lastModifyTime", "orderTotalPrice"};
+    public static final String[] NOT_COPY_FIELDS = new String[]{"id", "logicCode", "workStatus", "orderStatus", "createTime", "lastModifyTime", "orderTotalPrice"};
     /**
      * 日志
      */
@@ -63,7 +64,38 @@ public abstract class BaseConst {
      */
     public static final String NATIONAL = "QG";
 
-    public static final String YP_HOME_PAGE_INFO_KEY="yp_home_page_info_key";
+    public static final String YP_HOME_PAGE_INFO_KEY = "yp_home_page_info_key";
 
-    public static final String USER_SESSION_KEY="TCC-USER_SESSION_KEY";
+    public static final String USER_SESSION_KEY = "TCC-USER_SESSION_KEY";
+
+
+    public enum isDel {
+        is_Del(1, "删除"),
+        no_Del(0, "未删除");
+        private int code;
+        private String name;
+
+        isDel(int code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public isDel setCode(int code) {
+            this.code = code;
+            return this;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public isDel setName(String name) {
+            this.name = name;
+            return this;
+        }
+    }
 }
