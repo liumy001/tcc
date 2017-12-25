@@ -5,6 +5,7 @@ package com.eric.demo.commons.validator;
 
 import com.alibaba.fastjson.JSON;
 import com.eric.demo.commons.util.Check;
+import com.eric.demo.commons.util.SOAResParseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,10 @@ import java.util.Set;
 @Component
 public class ParamCheckLogic {
 
+    private static final int errorCode=1;
+
+    private static final String PARAM_NULL="校验对象为空错误";
+
     private MessageSource messageSource;
 
 
@@ -53,8 +58,8 @@ public class ParamCheckLogic {
         //参数是否为空
         if (Check.NuNStrStrict(paramStr)) {
             dto = new DataTransferObject();
-            dto.setErrCode(MessageSourceUtil.getIntMessage(messageSource, BaseConst.ERROR_CODE));
-            dto.setMsg(MessageSourceUtil.getChinese(messageSource, BaseConst.PARAM_NULL));
+            dto.setErrCode(errorCode);
+            dto.setMsg(PARAM_NULL);
             return dto;
         }
         return dto;
@@ -115,8 +120,8 @@ public class ParamCheckLogic {
         //参数是否为空
         if (Check.NuNObj(t)) {
             dto = new DataTransferObject();
-            dto.setErrCode(MessageSourceUtil.getIntMessage(messageSource, BaseConst.ERROR_CODE));
-            dto.setMsg(MessageSourceUtil.getChinese(messageSource, BaseConst.NOT_FOUND));
+            dto.setErrCode(errorCode);
+            dto.setMsg(PARAM_NULL);
             return dto;
         }
         //是否符合validator校验
