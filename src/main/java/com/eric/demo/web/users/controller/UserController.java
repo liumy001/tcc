@@ -1,5 +1,6 @@
 package com.eric.demo.web.users.controller;
 
+import com.eric.demo.commons.util.SOAResParseUtil;
 import com.eric.demo.commons.validator.DataTransferObject;
 import com.eric.demo.commons.validator.ParamCheckLogic;
 import com.eric.demo.web.users.dto.UserDto;
@@ -28,6 +29,7 @@ public class UserController {
     @ResponseBody
     public String login(HttpSession session, UserDto userDto) {
         DataTransferObject dataTransferObject= paramCheckLogic.checkObjParamValidate(userDto);
+        SOAResParseUtil.c
         return null;
     }
 
