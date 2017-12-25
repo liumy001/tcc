@@ -2,6 +2,7 @@ package test;
 
 import com.eric.demo.Application;
 import com.eric.demo.commons.util.HttpClientUtil;
+import org.jasypt.encryption.StringEncryptor;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,9 @@ public class Test {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private StringEncryptor stringEncryptor;
 
    /* @Autowired
     private UserService userService;
@@ -64,6 +68,11 @@ public class Test {
 
         mailSender.send(message);
 
+    }
+
+    @org.junit.Test
+    public void test3(){
+        System.out.println(stringEncryptor.encrypt("jdbc:mysql://127.0.0.1:3306/bill_prod?useUnicode=true&amp;charaterEncoding=utf-8"));
     }
 }
 
