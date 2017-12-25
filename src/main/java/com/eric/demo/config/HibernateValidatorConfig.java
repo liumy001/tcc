@@ -1,5 +1,6 @@
 package com.eric.demo.config;
 
+import com.google.common.collect.Lists;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +8,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.validation.Validator;
+import java.util.List;
 
 /**
  * <p></p>
@@ -30,27 +32,23 @@ public class HibernateValidatorConfig {
     }
 
     @Bean
-    public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource(){
-        ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource=new ReloadableResourceBundleMessageSource();
-        reloadableResourceBundleMessageSource.setBasenames("classpath:message/validator.properties","classpath:org/hibernate/validator/ValidationMessages","classpath:message/fw-order-message.properties");
-        reloadableResourceBundleMessageSource.setDefaultEncoding("utf-8");
+    public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
+        ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
+        reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
         reloadableResourceBundleMessageSource.setUseCodeAsDefaultMessage(false);
-        reloadableResourceBundleMessageSource.setCacheSeconds(60);
+        reloadableResourceBundleMessageSource.setCacheSeconds(120);
 
         return reloadableResourceBundleMessageSource;
     }
 
     @Bean
-    public LocalValidatorFactoryBean localValidatorFactoryBean(ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource){
-        LocalValidatorFactoryBean localValidatorFactoryBean=new LocalValidatorFactoryBean();
+    public LocalValidatorFactoryBean localValidatorFactoryBean() {
+        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
         localValidatorFactoryBean.setProviderClass(HibernateValidator.class);
-        localValidatorFactoryBean.setValidationMessageSource(reloadableResourceBundleMessageSource);
+        localValidatorFactoryBean.setValidationMessageSource(reloadableResourceBundleMessageSource());
 
         return localValidatorFactoryBean;
     }
-
-
-
 
 
 }

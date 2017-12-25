@@ -4,10 +4,10 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class UserDto {
 
-    @NotBlank(message = "{com.ziroom.kaka.push.common.entity.UserAccount.userName.null}")
+    @NotBlank(message = "用户名不能为空")
     private String userName;
 
-    @NotBlank(message = "{com.ziroom.kaka.push.common.entity.UserAccount.password.null}")
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     public String getUserName() {
