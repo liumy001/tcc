@@ -1,5 +1,6 @@
 package com.eric.demo.web.users.controller;
 
+import com.eric.demo.commons.util.ResponseVo;
 import com.eric.demo.commons.util.SOAResParseUtil;
 import com.eric.demo.commons.validator.DataTransferObject;
 import com.eric.demo.commons.validator.ParamCheckLogic;
@@ -27,9 +28,11 @@ public class UserController {
 
     @RequestMapping("login")
     @ResponseBody
-    public String login(HttpSession session, UserDto userDto) {
-        DataTransferObject dataTransferObject= paramCheckLogic.checkObjParamValidate(userDto);
-        SOAResParseUtil.c
+    public ResponseVo login(HttpSession session, UserDto userDto) {
+        DataTransferObject dataTransferObject = paramCheckLogic.checkObjParamValidate(userDto);
+        if (!SOAResParseUtil.checkDTO(dataTransferObject)) {
+            return ResponseVo.responseError(dataTransferObject.getMsg());
+        }
         return null;
     }
 
