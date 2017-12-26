@@ -1,4 +1,4 @@
-package com.eric.demo.web.bill;
+package com.eric.demo.web.bill.controller;
 
 import com.eric.demo.commons.annotation.CommonLog;
 import com.eric.demo.commons.util.Check;
