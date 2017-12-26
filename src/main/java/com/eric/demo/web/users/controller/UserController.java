@@ -1,7 +1,6 @@
 package com.eric.demo.web.users.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.eric.demo.advice.AutoSetterAspect;
 import com.eric.demo.commons.annotation.CommonLog;
 import com.eric.demo.commons.util.Check;
 import com.eric.demo.commons.util.MD5Util;
@@ -15,9 +14,9 @@ import com.eric.demo.web.users.domain.UserCriteria;
 import com.eric.demo.web.users.dto.RegisterDto;
 import com.eric.demo.web.users.dto.UserDto;
 import com.eric.demo.web.users.service.IUserService;
-import org.jasypt.encryption.StringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -55,9 +54,6 @@ public class UserController {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-
-    @Autowired
-    private StringEncryptor stringEncryptor;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -113,6 +109,12 @@ public class UserController {
             model.addAttribute("message", "该有户名或者邮箱在注册期间被其他用户激活，注册失败！");
             return "error/error";
         }
+        //插入信息
+        User insertUser = new User();
+        BeanUtils.copyProperties(registerDto, insertUser);
+        insertUser.setPassword(MD5Util.string2MD5(registerDto.getPassword()));
+        insertUser = userService.create(insertUser);
+        model.addAttribute("data", insertUser);
         return "";
     }
 
@@ -134,7 +136,7 @@ public class UserController {
                 return ResponseVo.responseError("用户名或者邮箱已存在");
             }
             String uuid = UUID.randomUUID().toString();
-            String url = registerCallBackUrl + "token=" + stringEncryptor.encrypt(uuid);
+            String url = registerCallBackUrl + "token=" + uuid;
             //redis缓存五分钟
             redisTemplate.opsForValue().set(uuid, JSONObject.toJSONString(registerDto), 5, TimeUnit.MINUTES);
             MimeMessage message = mailSender.createMimeMessage();
