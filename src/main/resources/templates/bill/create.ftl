@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/css/date.css" media="all">
     <title>填写记录</title>
     <style>
-        body,input,button{font:normal 14px "Microsoft Yahei";margin:0;padding:0}
+        body,input{font:normal 14px "Microsoft Yahei";margin:0;padding:0}
         .odform-tit{font-weight:normal;font-size:25px;color:#595757;line-height:40px;text-align:center;border-bottom:1px solid #c9cacb;margin:0;padding:5% 0}
         .odform-tit img{height:40px;vertical-align:middle;margin-right:15px}
         .odform{padding:5%}
@@ -17,9 +18,7 @@
         .odform .xl{background-image:url(../static/img/daetixian-xl.png);background-repeat:no-repeat;background-position:95% center;background-size:auto 20%}
     </style>
 
-    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../static/js/moment.js"></script>
-    <script type="text/javascript" src="../static/js/bootstrap-datetimepicker.js"></script>
+
 </head>
 
 <body>
@@ -32,21 +31,34 @@
         </div>
         <div class="input-group">
             <label for="khname">金额</label>
-            <input type="text" id="khname" placeholder="请输入您的客户姓名">
+            <input type="text" id="amount" placeholder="请输入您金额">
         </div>
-        <div class="input-group">
-            <label for="khname">消费时间</label>
             <div class="iDate full">
-                <input type="text" class="cal" id="khname" placeholder="请选择消费时间">
-                <button type="button" class="addOn"></button>
+                <label for="khname">消费时间</label>
+                <input type="text" class="cal" id="consumTime" name="consumTime" placeholder="请选择消费时间">
+                <#--<button type="button" class="addOn"></button>
             </div>
-        </div>
+
         <div class="input-group">
             <label for="khname">附加备注</label>
-            <input type="text" id="khname" placeholder="备注">
+            <input type="text" id="remark" placeholder="备注">
         </div>
-        <button>马上预约</button>
+        <button style="font:normal 14px "Microsoft Yahei";margin:0;padding:0">提交</button>
     </form>
 </div>
+<script type="text/javascript" src="../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/moment.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        if($(".iDate.full").length>0){
+            $(".iDate.full").datetimepicker({
+                locale: "zh-cn",
+                format: "YYYY-MM-DD a hh:mm",
+                dayViewHeaderFormat: "YYYY年 MMMM"
+            });
+        }
+    })
+</script>
 </body>
 </html>

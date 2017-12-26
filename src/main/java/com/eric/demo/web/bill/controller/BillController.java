@@ -59,4 +59,9 @@ public class BillController {
         return ResponseVo.responseOk(null);
     }
 
+    @RequestMapping(value = "/toCreate")
+    public String toCreate() {
+        return "bill/create";
+    }
+
 }
