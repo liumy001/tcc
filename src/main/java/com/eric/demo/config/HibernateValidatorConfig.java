@@ -37,7 +37,6 @@ public class HibernateValidatorConfig {
         reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
         reloadableResourceBundleMessageSource.setUseCodeAsDefaultMessage(false);
         reloadableResourceBundleMessageSource.setCacheSeconds(120);
-
         return reloadableResourceBundleMessageSource;
     }
 
