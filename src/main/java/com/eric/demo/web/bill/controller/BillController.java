@@ -10,16 +10,21 @@ import com.eric.demo.commons.validator.ParamCheckLogic;
 import com.eric.demo.web.bill.domain.Bill;
 import com.eric.demo.web.bill.dto.BillSaveDto;
 import com.eric.demo.web.bill.service.IBillService;
+import com.eric.demo.web.category.domain.Category;
+import com.eric.demo.web.category.domain.CategoryCriteria;
+import com.eric.demo.web.category.service.ICategoryService;
 import com.eric.demo.web.users.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "bill")
@@ -32,6 +37,9 @@ public class BillController {
 
     @Autowired
     private IBillService billService;
+
+    @Autowired
+    private ICategoryService categoryService;
 
     @RequestMapping(value = "create")
     @CommonLog
@@ -60,7 +68,11 @@ public class BillController {
     }
 
     @RequestMapping(value = "/toCreate")
-    public String toCreate() {
+    public String toCreate(Model model) {
+        CategoryCriteria categoryCriteria = new CategoryCriteria();
+        categoryCriteria.or().andParentCategoryIdIsNull();
+        List<Category> categoryList = categoryService.search(categoryCriteria);
+        model.addAttribute("data", categoryList);
         return "bill/create";
     }
 
