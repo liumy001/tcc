@@ -23,6 +23,15 @@ public class AllInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
+
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int port = request.getServerPort();
+        String path = request.getContextPath();
+        String basePath = scheme + "://" + serverName + ":" + port + path;
+        LOGGER.info(basePath);
+        request.setAttribute("basePath", basePath);
+
         String url = request.getRequestURI().toString();
         String[] urlSplit = urls.split(",");
         for (int i = 0; i < urlSplit.length; i++) {

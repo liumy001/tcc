@@ -203,75 +203,75 @@
             <input type="text" id="billName" placeholder="请输入账单名称">
         </div>
         <div class="pc-kk-form-list">
-            <input type="text" id="amount" placeholder="请输入金额">
+            <input type="text" id="amount" onblur="checkAmount()" placeholder="请输入金额">
         </div>
-</div>
 
-<div class="pc-kk-form-list pc-kk-form-list-clear">
-    <div class="nice-select" name="nice-select">
-        <input type='text' id="date" value=选择日期" readonly>
-        <ul id="date-list"></ul>
 
-    </div>
-    <div class="nice-select" name="nice-select" style="float:right">
-        <input type="text" id="time" value="选择时间" readonly>
-        <ul>
-            <li data-value="00:00">00:00</li>
-            <li data-value="01:00">01:00</li>
-            <li data-value="02:00">02:00</li>
-            <li data-value="03:00">03:00</li>
-            <li data-value="04:00">04:00</li>
-            <li data-value="05:00">05:00</li>
-            <li data-value="06:00">06:00</li>
-            <li data-value="07:00">07:00</li>
-            <li data-value="08:00">08:00</li>
-            <li data-value="09:00">09:00</li>
-            <li data-value="10:00">10:00</li>
-            <li data-value="12:00">11:00</li>
-            <li data-value="13:00">13:00</li>
-            <li data-value="14:00">14:00</li>
-            <li data-value="15:00">15:00</li>
-            <li data-value="16:00">16:00</li>
-            <li data-value="17:00">17:00</li>
-            <li data-value="18:00">18:00</li>
-            <li data-value="19:00">19:00</li>
-            <li data-value="20:00">20:00</li>
-            <li data-value="21:00">21:00</li>
-            <li data-value="22:00">22:00</li>
-            <li data-value="23:00">23:00</li>
-        </ul>
+        <div class="pc-kk-form-list pc-kk-form-list-clear">
+            <div class="nice-select" name="nice-select">
+                <input type='text' id="dates" value=选择日期" readonly>
+                <ul id="date-list"></ul>
 
-    </div>
-</div>
-<div class="pc-kk-form-list pc-kk-form-list-clear">
-    <div class="nice-select" name="nice-select" style="width:100%" id="cateSelect">
-        <input type="text" id="bigCategory" relValue="" value="选择类别" readonly>
-        <ul>
-        <#if data?exists>
-            <#list data as key>
-                <tr>
-                    <li data-value="${key.id}">${key.categoryName}</li>
-                </tr>
-            </#list>
-        </#if>
-        </ul>
-    </div>
-</div>
-<div class="pc-kk-form-list pc-kk-form-list-clear">
-    <div class="nice-select" name="nice-select" style="width:100%" id="zCateSelect">
-        <input type="text" relValue="" value="选择子类" readonly>
-        <ul id="zC">
+            </div>
+            <div class="nice-select" name="nice-select" style="float:right">
+                <input type="text" id="time" value="选择时间" readonly>
+                <ul>
+                    <li data-value="00:00:00">00:00:00</li>
+                    <li data-value="01:00:00">01:00:00</li>
+                    <li data-value="02:00:00">02:00:00</li>
+                    <li data-value="03:00:00">03:00:00</li>
+                    <li data-value="04:00:00">04:00:00</li>
+                    <li data-value="05:00:00">05:00:00</li>
+                    <li data-value="06:00:00">06:00:00</li>
+                    <li data-value="07:00:00">07:00:00</li>
+                    <li data-value="08:00:00">08:00:00</li>
+                    <li data-value="09:00:00">09:00:00</li>
+                    <li data-value="10:00:00">10:00:00</li>
+                    <li data-value="12:00:00">11:00:00</li>
+                    <li data-value="13:00:00">13:00:00</li>
+                    <li data-value="14:00:00">14:00:00</li>
+                    <li data-value="15:00:00">15:00:00</li>
+                    <li data-value="16:00:00">16:00:00</li>
+                    <li data-value="17:00:00">17:00:00</li>
+                    <li data-value="18:00:00">18:00:00</li>
+                    <li data-value="19:00:00">19:00:00</li>
+                    <li data-value="20:00:00">20:00:00</li>
+                    <li data-value="21:00:00">21:00:00</li>
+                    <li data-value="22:00:00">22:00:00</li>
+                    <li data-value="23:00:00">23:00:00</li>
+                </ul>
 
-        </ul>
+            </div>
+        </div>
+        <div class="pc-kk-form-list pc-kk-form-list-clear">
+            <div class="nice-select" name="nice-select" style="width:100%" id="cateSelect">
+                <input type="text" id="bigCategory" relValue="" value="选择类别" readonly>
+                <ul>
+                <#if data?exists>
+                    <#list data as key>
+                        <tr>
+                            <li data-value="${key.id}">${key.categoryName}</li>
+                        </tr>
+                    </#list>
+                </#if>
+                </ul>
+            </div>
+        </div>
+        <div class="pc-kk-form-list pc-kk-form-list-clear">
+            <div class="nice-select" name="nice-select" style="width:100%" id="zCateSelect">
+                <input type="text" id="smallCategory" relValue="" value="选择子类" readonly>
+                <ul id="zC">
+
+                </ul>
+            </div>
+        </div>
+        <div class="pc-kk-form-list" style="height:auto">
+            <textarea id="remark" onfocus="textClear()">请输入备注内容</textarea>
+        </div>
+    </form>
+    <div class="pc-kk-form-btn">
+        <button  id="save" onclick="toSubmit()">保存</button>
     </div>
-</div>
-<div class="pc-kk-form-list" style="height:auto">
-    <textarea>Explain</textarea>
-</div>
-<div class="pc-kk-form-btn">
-    <button>Submit</button>
-</div>
-</form>
 </div>
 
 
@@ -359,7 +359,7 @@
             });
         });
 
-        $('#zC').delegate('li',"click", function (e) {
+        $('#zC').delegate('li', "click", function (e) {
             console.log("响应子类事件");
             var val = $(this).text();
             var relVal = $(this).attr('data-value');
@@ -373,6 +373,100 @@
 
     });
 
+    function toSubmit() {
+        console.log("响应表单提交请求")
+        var billName = $("#billName").val();
+        var amount = $("#amount").val();
+        var bigCategory = $("#bigCategory").prop("relValue");
+        var smallCategory = $("#smallCategory").prop("relValue");
+        var date = $("#dates").prop('relValue');
+        var time = $("#time").prop('relValue');
+        var remark = $("#remark").val();
+        console.log(billName+","+amount+","+bigCategory+","+smallCategory+","+date+","+time+","+remark)
+        if (!billName) {
+            alert('请输入账单名称')
+            return
+        }
+        if (!bigCategory) {
+            alert('请选择大类')
+            return
+        }
+        if (!smallCategory) {
+            alert('请选择小类')
+            return
+        }
+        if (!date) {
+            alert('请输入账单名称')
+            return
+        }
+        if (!time) {
+            alert('请选择日期')
+            return
+        }
+        if (!amount) {
+            alert('请输入金额')
+            return
+        }
+        var reg = new RegExp(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/);
+        if (!reg.test(amount)) {
+            alert('数字格式错误')
+            $('#amount').val('');
+            return
+        }
+
+        $.ajax({
+            url: "/bill/create",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                "categoryId": smallCategory,
+                "amount": amount,
+                "billName": billName,
+                "consumTime": date + " " + time,
+                "remark": remark
+            },    //参数值
+            type: "post",   //请求方式
+            beforeSend: function () {
+                console.log("请求前")
+            },
+            success: function (req) {
+                if (req.status == 'ok') {
+                    alert('保存成功');
+                    window.location.href = "${basePath}/bill/toCreate"
+                } else {
+                    alert(req.message)
+                    return;
+                }
+            },
+            complete: function () {
+                console.log("请求完成")
+            },
+            error: function () {
+                console.log("请求异常")
+            }
+        });
+
+    }
+
+    function checkAmount() {
+        var amount = $('#amount').val();
+        if (!amount) {
+            return
+        }
+        var reg = new RegExp(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/);
+        if (!reg.test(amount)) {
+            alert('数字格式错误')
+            $('#amount').val('');
+            return
+        }
+    }
+
+    function textClear() {
+        var remark = $("#remark").val();
+        if (remark == '请输入备注内容') {
+            $("#remark").val('');
+        }
+    }
 </script>
 </body>
 </html>

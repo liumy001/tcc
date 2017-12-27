@@ -20,7 +20,6 @@ public class BillSaveDto {
     @Min(value = 0, message = "金额必须大于等于0元")
     private String amount;
     private String remark;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @NotNull(message = "消费时间不可为空")
     private Date consumTime;
 
