@@ -24,7 +24,7 @@ public class BillReportSearchTask {
     @Autowired
     private IBillReportTaskService billReportTaskService;
 
-    @Scheduled(cron = "0 0/2 * * * ?")
+    @Scheduled(cron = "0 */1 * * * *")
     public void findTask() {
         BillReportTaskCriteria billReportTaskCriteria = new BillReportTaskCriteria();
         List<Integer> statusList = Lists.newArrayList(0, 3, 4);

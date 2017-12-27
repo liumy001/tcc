@@ -11,11 +11,10 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@EnableScheduling
 @SpringBootApplication
 @EnableAsync
 @EnableRedisHttpSession
-@EnableScheduling
 public class Application {
 
     public static void main(String[] args) throws Exception {

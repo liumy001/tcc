@@ -62,8 +62,4 @@ public class ExecutorConfig {
         return executor;
     }
 
-    @Bean(initMethod = "execute")
-    public ReportQueueProcess reportQueueProcess() {
-        return new ReportQueueProcess();
-    }
 }
