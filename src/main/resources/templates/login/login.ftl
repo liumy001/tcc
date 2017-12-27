@@ -74,7 +74,8 @@
                                        class="form-password form-control" id="form-password">
                             </div>
                         </form>
-                        <button class="btn" onclick="toLogin()">登录</button>
+                        <button class="btn" style="margin-left: 80px;" onclick="toLogin()">登录</button>
+                        <button class="btn" style="float: right;margin-right: 80px;" onclick="toRegPage()">注册</button>
                     </div>
                 </div>
             </div>
@@ -98,6 +99,10 @@
     $(function () {
 
     });
+
+    function toRegPage() {
+        window.location.href = "${basePath}/user/toReg"
+    }
 
     function toLogin() {
         var userName = $("#form-username").val();
@@ -125,6 +130,7 @@
             success: function (req) {
                 if (req.status == 'ok') {
                     window.location.href = "${basePath}/bill/toCreate"
+                    return
                 } else {
                     alert(req.message)
                     return;

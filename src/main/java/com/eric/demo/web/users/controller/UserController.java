@@ -115,7 +115,7 @@ public class UserController {
         insertUser.setPassword(MD5Util.string2MD5(registerDto.getPassword()));
         insertUser = userService.create(insertUser);
         model.addAttribute("data", insertUser);
-        return "";
+        return "redirect:/";
     }
 
     @RequestMapping("sendEmail")
@@ -153,6 +153,11 @@ public class UserController {
         }
         return ResponseVo.responseOk(null);
 
+    }
+
+    @RequestMapping(value = "/toReg")
+    public String toReg() {
+        return "login/reg";
     }
 
 }
