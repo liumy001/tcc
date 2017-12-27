@@ -24,8 +24,10 @@
 
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="../static/img/ico/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../static/img/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../static/img/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="../static/img/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="../static/img/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../static/img/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../static/img/ico/apple-touch-icon-57-precomposed.png">
 
@@ -63,35 +65,20 @@
                         <form role="form" action="" method="post" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">用户名</label>
-                                <input type="text" name="username" placeholder="请输入用户名" class="form-username form-control" id="form-username">
+                                <input type="text" name="username" placeholder="请输入用户名"
+                                       class="form-username form-control" id="form-username">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-password">密码</label>
-                                <input type="password" name="password" placeholder="请输入密码" class="form-password form-control" id="form-password">
+                                <input type="password" name="password" placeholder="请输入密码"
+                                       class="form-password form-control" id="form-password">
                             </div>
-                            <button type="submit" class="btn">登录</button>
                         </form>
+                        <button class="btn" onclick="toLogin()">登录</button>
                     </div>
                 </div>
             </div>
-            <!--
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 social-login">
-                    <h3>...or login with:</h3>
-                    <div class="social-login-buttons">
-                        <a class="btn btn-link-2" href="#">
-                            <i class="fa fa-facebook"></i> Facebook
-                        </a>
-                        <a class="btn btn-link-2" href="#">
-                            <i class="fa fa-twitter"></i> Twitter
-                        </a>
-                        <a class="btn btn-link-2" href="#">
-                            <i class="fa fa-google-plus"></i> Google Plus
-                        </a>
-                    </div>
-                </div>
-            </div>
-            -->
+
         </div>
     </div>
 
@@ -107,7 +94,51 @@
 <!--[if lt IE 10]>
 <script src="../static/js/placeholder.js"></script>
 <![endif]-->
+<script>
+    $(function () {
 
+    });
+
+    function toLogin() {
+        var userName = $("#form-username").val();
+        var password = $("#form-password").val();
+        if (!userName) {
+            alert('请输入用户名')
+            return
+        }
+        if (!password) {
+            alert('请输入密码')
+            return
+        }
+        $.ajax({
+            url: "/user/login",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                "userName": userName,
+                "password": password
+            },    //参数值
+            type: "post",   //请求方式
+            beforeSend: function () {
+                console.log("请求前")
+            },
+            success: function (req) {
+                if (req.status == 'ok') {
+                    window.location.href = "${basePath}/bill/toCreate"
+                } else {
+                    alert(req.message)
+                    return;
+                }
+            },
+            complete: function () {
+                console.log("请求完成")
+            },
+            error: function () {
+                console.log("请求异常")
+            }
+        });
+    }
+</script>
 </body>
 
 </html>
