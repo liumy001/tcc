@@ -8,6 +8,7 @@
  */
 package com.eric.demo.config;
 
+import com.eric.demo.task.ReportQueueProcess;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -17,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * <p></p>
- *
+ * <p>
  * <PRE>
  * <BR>	修改记录
  * <BR>-----------------------------------------------
@@ -25,8 +26,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * </PRE>
  *
  * @author wurt2
- * @since 1.0
  * @version 1.0
+ * @since 1.0
  */
 @Configuration
 public class ExecutorConfig {
@@ -42,9 +43,9 @@ public class ExecutorConfig {
     /**
      * Set the capacity for the ThreadPoolExecutor's BlockingQueue.
      */
-    private  static final int queueCapacity = 1000;
+    private static final int queueCapacity = 1000;
 
-    private  static final String ThreadNamePrefix = "kakaExecutor-";
+    private static final String ThreadNamePrefix = "kakaExecutor-";
 
     @Bean(name = "kaka.executor")
     public Executor kakaExecutor() {
@@ -59,5 +60,10 @@ public class ExecutorConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.initialize();
         return executor;
+    }
+
+    @Bean(initMethod = "execute")
+    public ReportQueueProcess reportQueueProcess() {
+        return new ReportQueueProcess();
     }
 }
