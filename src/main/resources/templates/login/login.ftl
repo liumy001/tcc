@@ -74,8 +74,8 @@
                                        class="form-password form-control" id="form-password">
                             </div>
                         </form>
-                        <button class="btn" style="margin-left: 80px;" onclick="toLogin()">登录</button>
-                        <button class="btn" style="float: right;margin-right: 80px;" onclick="toRegPage()">注册</button>
+                        <button class="btn" style="margin-left: 40px;" onclick="toLogin()">登录</button>
+                        <button class="btn" style="float: right;margin-right: 40px;" onclick="toRegPage()">去注册</button>
                     </div>
                 </div>
             </div>

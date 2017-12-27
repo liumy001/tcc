@@ -85,7 +85,8 @@
                                        id="form-email">
                             </div>
                         </form>
-                        <button onclick="toReg()" class="btn">注册</button>
+                        <button onclick="toReg()" style="margin-left: 40px;" class="btn">注册</button>
+                        <button onclick="toLog()" style="margin-right: 40px;" class="btn">去登录</button>
                     </div>
                 </div>
             </div>
@@ -156,6 +157,10 @@
                 console.log("请求异常")
             }
         });
+    }
+
+    function toLog() {
+        window.location.href = "${basePath}";
     }
 </script>
 </body>
