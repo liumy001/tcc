@@ -10,10 +10,10 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/css/form-elements.css">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/css/form-elements.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,13 +86,13 @@
 
 
 <!-- Javascript -->
-<script src="../static/js/jquery-1.11.1.min.js"></script>
-<script src="../static/bootstrap/js/bootstrap.min.js"></script>
-<script src="../static/js/jquery.backstretch.min.js"></script>
-<script src="../static/js/scripts.js"></script>
+<script src="../../static/js/jquery-1.11.1.min.js"></script>
+<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../static/js/jquery.backstretch.min.js"></script>
+<script src="../../static/js/scripts.js"></script>
 
 <!--[if lt IE 10]>
-<script src="../static/js/placeholder.js"></script>
+<script src="../../static/js/placeholder.js"></script>
 <![endif]-->
 <script>
     $(function () {
