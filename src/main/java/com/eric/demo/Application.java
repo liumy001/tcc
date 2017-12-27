@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.Date;
 @SpringBootApplication
 @EnableAsync
 @EnableRedisHttpSession
+@EnableScheduling
 public class Application {
 
     public static void main(String[] args) throws Exception {
