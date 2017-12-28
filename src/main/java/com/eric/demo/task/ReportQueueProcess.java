@@ -94,13 +94,13 @@ public class ReportQueueProcess {
         helper.setTo(emailList.toArray(new String[emailList.size()]));
         helper.setSubject("消费明细");
         //html 加如参数 true
-        String text = "日期：" + DateUtil.dateFormat(billReportTask.getStartTime()) + "日到" + DateUtil.dateFormat(billReportTask.getEndTime()) + "日 累计消费：" + totalPrice / 100.0 + "元 明细如下：\n";
+        String text = "日期：" + DateUtil.dateFormat(billReportTask.getStartTime()) + "00:00-" + DateUtil.dateFormat(billReportTask.getEndTime()) + "23:59 累计消费：" + totalPrice / 100.0 + "元 明细如下：\n";
         for (int i = 0; i < billList.size(); i++) {
             Bill bill = billList.get(i);
             CategoryCriteria categoryCriteria = new CategoryCriteria();
             categoryCriteria.or().andIdEqualTo(bill.getCategoryId());
             List<Category> category = categoryService.search(categoryCriteria);
-            text += "              "+i + "." + category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费：" + bill.getAmount() / 100.0 + "元\n";
+            text += ""+i + "." + category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费：" + bill.getAmount() / 100.0 + "元\n";
         }
         helper.setText(text);
 
