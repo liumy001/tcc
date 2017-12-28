@@ -49,10 +49,7 @@ public class BillController {
         User user = (User) session.getAttribute(BaseConst.USER_SESSION_KEY);
         try {
             if (Check.NuNObj(user)) {
-                //return ResponseVo.responseError("登录过期请重新登录");
-                user=new User();
-                user.setId("71f7a21e0d044ce8bc9603c700bf27cb");
-                user.setUserName("刘明跃");
+                return ResponseVo.responseError("登录超时,请重新登录！");
             }
             DataTransferObject dto = paramCheckLogic.checkObjParamValidate(billSaveDto);
             if (!SOAResParseUtil.checkDTO(dto)) {
