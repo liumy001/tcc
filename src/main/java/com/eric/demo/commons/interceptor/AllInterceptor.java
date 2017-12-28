@@ -30,13 +30,9 @@ public class AllInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
 
-        String scheme = request.getScheme();
-        String serverName = request.getServerName();
-        int port = request.getServerPort();
-        String path = request.getContextPath();
-        String basePath = scheme + "://" + serverName + ":" + port + path;
-        LOGGER.info(basePath);
-        request.setAttribute("basePath", basePath);
+        String scheme = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+        LOGGER.info(scheme);
+        request.setAttribute("basePath", scheme);
 
         String url = request.getRequestURI().toString();
         LOGGER.info("请求url：" + url);
