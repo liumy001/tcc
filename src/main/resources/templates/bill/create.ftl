@@ -209,7 +209,7 @@
 
         <div class="pc-kk-form-list pc-kk-form-list-clear">
             <div class="nice-select" name="nice-select">
-                <input type='text' id="dates" value=选择日期" readonly>
+                <input type='text' id="dates" value="选择日期" readonly>
                 <ul id="date-list"></ul>
 
             </div>
