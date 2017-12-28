@@ -1,5 +1,6 @@
 package com.eric.demo.web.users.dto;
 
+import com.eric.demo.commons.util.Check;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
@@ -19,7 +20,7 @@ public class UserDto {
     }
 
     public UserDto setUserName(String userName) {
-        this.userName = userName;
+        this.userName = Check.NuNObj(userName) ? userName : userName.trim();
         return this;
     }
 
@@ -28,7 +29,7 @@ public class UserDto {
     }
 
     public UserDto setPassword(String password) {
-        this.password = password;
+        this.password = Check.NuNObj(password) ? password : password.trim();
         return this;
     }
 }
