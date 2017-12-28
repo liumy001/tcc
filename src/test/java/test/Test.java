@@ -72,9 +72,8 @@ public class Test {
 
     @org.junit.Test
     public void test3(){
-        //jdbc:mysql://127.0.0.1:3306/bill_prod??autoReconnect=true&useUnicode=true&characterEncoding=utf-8
-        System.out.println(stringEncryptor.encrypt("jdbc:mysql://127.0.0.1:3306/bill_prod??autoReconnect=true&useUnicode=true&characterEncoding=utf-8"));
-        //System.out.println(stringEncryptor.decrypt("D10frOld3MRXdFux4l+Q5lcYFSomMxFJH8FReohZC/6aF9Jd7GoGe0Ezj0jY5292mVK4teP/mKarFABLp2CMtHvUPIl0IjV+a/jAcIUk0jeuOKwWZdeke1nUVH0HV9bk"));
+        System.out.println(stringEncryptor.encrypt("jdbc:mysql://60.205.229.68:1306/bill_test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8"));
+        //System.out.println(stringEncryptor.decrypt("dQ6DsHsFvZtA0yIFHHzE7sQ/6mzewvDMre7V+TnH/iosHUyNoF1ClBm20/C96kgnJF+EZ3kOG/RCD3c4CxoEqIUlldpagn1ONCKjrjCNtlg4gGW6fP80A1WRiTT8uZ9JwC/emcobaHV+U1shEfrCDQ=="));
     }
 }
 
