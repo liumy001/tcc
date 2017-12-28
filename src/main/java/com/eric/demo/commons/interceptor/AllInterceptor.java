@@ -39,10 +39,12 @@ public class AllInterceptor extends HandlerInterceptorAdapter {
         request.setAttribute("basePath", basePath);
 
         String url = request.getRequestURI().toString();
+        LOGGER.info("请求url：" + url);
         String[] urlSplit = urls.split(",");
         for (int i = 0; i < urlSplit.length; i++) {
             String matchString = urlSplit[i];
             if (matchString.contains(url)) {
+                LOGGER.info("请求url过滤成功：" + url+":"+matchString);
                 return super.preHandle(request, response, handler);
             }
         }
