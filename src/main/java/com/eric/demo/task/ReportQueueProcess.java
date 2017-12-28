@@ -121,7 +121,7 @@ public class ReportQueueProcess {
             CategoryCriteria categoryCriteria = new CategoryCriteria();
             categoryCriteria.or().andIdEqualTo(bill.getCategoryId());
             List<Category> category = categoryService.search(categoryCriteria);
-            text += "" + i + " " + category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费：" + bill.getAmount() / 100.0 + "元\n";
+            text += "" + i + " 日期："+DateUtil.dateFormat(bill.getCreatedDate(),"yyyy-MM-dd HH:mm:ss") + " 消费名称："+category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费金额：" + bill.getAmount() / 100.0 + "元\n";
         }
         text += "--------------------------------------------------类别明细----------------------------------------------------------------------------\n";
         int i = 0;
