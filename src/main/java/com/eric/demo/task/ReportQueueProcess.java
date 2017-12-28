@@ -8,10 +8,13 @@ import com.eric.demo.web.bill.domain.Bill;
 import com.eric.demo.web.bill.domain.BillCriteria;
 import com.eric.demo.web.bill.domain.BillReportTask;
 import com.eric.demo.web.bill.service.IBillService;
+import com.eric.demo.web.category.domain.Category;
+import com.eric.demo.web.category.domain.CategoryCriteria;
+import com.eric.demo.web.category.service.ICategoryService;
 import com.eric.demo.web.users.domain.User;
 import com.eric.demo.web.users.domain.UserCriteria;
 import com.eric.demo.web.users.service.IUserService;
-import com.eric.demo.web.users.service.impl.UserService;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -43,6 +46,9 @@ public class ReportQueueProcess {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ICategoryService categoryService;
+
     @Scheduled(cron = "*/10 * * * * *")
     public void execute() throws Exception {
         String value = redisTemplate.opsForList().leftPop(key);
@@ -64,25 +70,39 @@ public class ReportQueueProcess {
 
     private void process(BillReportTask billReportTask) throws Exception {
         BillCriteria billCriteria = new BillCriteria();
-        billCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode()).andUidEqualTo(billReportTask.getUid()).andConsumTimeGreaterThanOrEqualTo(billReportTask.getEndTime()).andConsumTimeLessThanOrEqualTo(billReportTask.getStartTime());
+        billCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode()).andUidEqualTo(billReportTask.getUid()).andConsumTimeGreaterThanOrEqualTo(billReportTask.getStartTime()).andConsumTimeLessThanOrEqualTo(billReportTask.getEndTime());
         List<Bill> billList = billService.search(billCriteria);
         int totalPrice = 0;
         for (Bill bill : billList) {
             totalPrice += bill.getAmount();
         }
-
         UserCriteria userCriteria = new UserCriteria();
         userCriteria.or().andIdEqualTo(billReportTask.getUid());
         List<User> userList = userService.search(userCriteria);
 
-
+        String emails = userList.get(0).getExtEmail();
+        List<String> emailList = Lists.newArrayList(userList.get(0).getEmail());
+        if (!Check.NuNObj(emails)) {
+            String[] e = emails.split(",");
+            for (String ee : e) {
+                emailList.add(ee);
+            }
+        }
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom("liumingyue0203@163.com");
-        helper.setTo(userList.get(0).getEmail());
+        helper.setTo(emailList.toArray(new String[emailList.size()]));
         helper.setSubject("消费明细");
         //html 加如参数 true
-        helper.setText("日期：" + DateUtil.dateFormat(billReportTask.getStartTime()) + "-" + DateUtil.dateFormat(billReportTask.getEndTime()) + "累计消费：" + totalPrice / 100.0 + "元");
+        String text = "日期：" + DateUtil.dateFormat(billReportTask.getStartTime()) + "日到" + DateUtil.dateFormat(billReportTask.getEndTime()) + "日 累计消费：" + totalPrice / 100.0 + "元 明细如下：\n";
+        for (int i = 0; i < billList.size(); i++) {
+            Bill bill = billList.get(i);
+            CategoryCriteria categoryCriteria = new CategoryCriteria();
+            categoryCriteria.or().andIdEqualTo(bill.getCategoryId());
+            List<Category> category = categoryService.search(categoryCriteria);
+            text += "              "+i + "." + category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费：" + bill.getAmount() / 100.0 + "元\n";
+        }
+        helper.setText(text);
 
         mailSender.send(message);
     }

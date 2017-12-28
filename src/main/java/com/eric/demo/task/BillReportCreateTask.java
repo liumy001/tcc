@@ -35,7 +35,7 @@ public class BillReportCreateTask {
     @Autowired
     private IBillService billService;
 
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 10 0 * * *")
     public void createDayTask() throws Exception {
 
         UserCriteria userCriteria = new UserCriteria();
@@ -60,7 +60,7 @@ public class BillReportCreateTask {
                 billReportTask.setStatus(0);
                 billReportTask.setSendStatus(0);
                 billReportTask.setTotalAmount(0);
-
+                billReportTask.setUid(user.getId());
                 billReportTaskService.create(billReportTask);
             }
         }
