@@ -32,6 +32,8 @@ public class BillReportSearchTask {
         List<BillReportTask> billReportTaskList = billReportTaskService.search(billReportTaskCriteria);
         for (BillReportTask billReportTask : billReportTaskList) {
             redisTemplate.opsForList().leftPush(key, JSONObject.toJSONString(billReportTask));
+            billReportTask.setStatus(1);
+            billReportTaskService.update(billReportTask);
         }
         return;
     }

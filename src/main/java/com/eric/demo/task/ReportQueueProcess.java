@@ -7,6 +7,7 @@ import com.eric.demo.commons.validator.BaseConst;
 import com.eric.demo.web.bill.domain.Bill;
 import com.eric.demo.web.bill.domain.BillCriteria;
 import com.eric.demo.web.bill.domain.BillReportTask;
+import com.eric.demo.web.bill.service.IBillReportTaskService;
 import com.eric.demo.web.bill.service.IBillService;
 import com.eric.demo.web.category.domain.Category;
 import com.eric.demo.web.category.domain.CategoryCriteria;
@@ -15,6 +16,8 @@ import com.eric.demo.web.users.domain.User;
 import com.eric.demo.web.users.domain.UserCriteria;
 import com.eric.demo.web.users.service.IUserService;
 import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,6 +32,10 @@ import java.util.concurrent.Executors;
 
 @Component
 public class ReportQueueProcess {
+
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportQueueProcess.class);
+
 
     private ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
 
@@ -48,6 +55,9 @@ public class ReportQueueProcess {
 
     @Autowired
     private ICategoryService categoryService;
+
+    @Autowired
+    private IBillReportTaskService billReportTaskService;
 
     @Scheduled(cron = "*/10 * * * * *")
     public void execute() throws Exception {
@@ -100,11 +110,21 @@ public class ReportQueueProcess {
             CategoryCriteria categoryCriteria = new CategoryCriteria();
             categoryCriteria.or().andIdEqualTo(bill.getCategoryId());
             List<Category> category = categoryService.search(categoryCriteria);
-            text += ""+i + "." + category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费：" + bill.getAmount() / 100.0 + "元\n";
+            text += "" + i + "." + category.get(0).getCategoryName() + "-" + bill.getBillName() + "花费：" + bill.getAmount() / 100.0 + "元\n";
         }
         helper.setText(text);
+        try {
+            mailSender.send(message);
+            billReportTask.setStatus(2);
+            billReportTask.setSendStatus(1);
+            billReportTaskService.update(billReportTask);
+        } catch (Exception e) {
+            LOGGER.error("邮件发送失败", e);
+            billReportTask.setStatus(0);
+            billReportTask.setSendStatus(2);
+            billReportTaskService.update(billReportTask);
+        }
 
-        mailSender.send(message);
     }
 
 }
