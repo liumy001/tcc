@@ -67,9 +67,7 @@ public abstract class BaseServiceImpl<T extends AbstractEntity, E extends Abstra
     @CommonLog
     public T update(T entity) {
         Assert.notNull(entity);
-        T existing = getDao().selectByPrimaryKey(entity.getId());
-        BeanUtils.copyProperties(entity, existing);
-        getDao().updateByPrimaryKeySelective(existing);
+        getDao().updateByPrimaryKeySelective(entity);
         return findOne(entity.getId());
     }
 
