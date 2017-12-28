@@ -227,7 +227,8 @@
                     <li data-value="08:00:00">08:00:00</li>
                     <li data-value="09:00:00">09:00:00</li>
                     <li data-value="10:00:00">10:00:00</li>
-                    <li data-value="12:00:00">11:00:00</li>
+                    <li data-value="11:00:00">11:00:00</li>
+                    <li data-value="12:00:00">12:00:00</li>
                     <li data-value="13:00:00">13:00:00</li>
                     <li data-value="14:00:00">14:00:00</li>
                     <li data-value="15:00:00">15:00:00</li>
