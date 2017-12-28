@@ -52,6 +52,36 @@ public class BillReportCreateTask {
 
     }
 
+    @Scheduled(cron = "0 15 1 ? * MON")
+    public void createWeekDayTask() throws Exception {
+        UserCriteria userCriteria = new UserCriteria();
+        userCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode());
+        List<User> userList = userService.search(userCriteria);
+        if (Check.NuNCollection(userList)) {
+            LOGGER.error("未扫描到有效用户");
+            return;
+        }
+        String date = DateUtil.getDayBeforeCurrentDate();
+        Date startDate = DateUtil.parseDate(DateUtil.getFirstDayOfWeek(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 00:00:00", "yyyy-MM-dd HH:ss:mm");
+        Date endDate = DateUtil.parseDate(DateUtil.getLastDayOfWeek(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 23:59:59", "yyyy-MM-dd HH:ss:mm");
+        process(userList, startDate, endDate);
+    }
+
+    @Scheduled(cron = " 0 15 2 1 * ?")
+    public void createMounthTask() throws Exception {
+        UserCriteria userCriteria = new UserCriteria();
+        userCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode());
+        List<User> userList = userService.search(userCriteria);
+        if (Check.NuNCollection(userList)) {
+            LOGGER.error("未扫描到有效用户");
+            return;
+        }
+        String date = DateUtil.getDayBeforeCurrentDate();
+        Date startDate = DateUtil.parseDate(DateUtil.getFirstDayOfMonth(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 00:00:00", "yyyy-MM-dd HH:ss:mm");
+        Date endDate = DateUtil.parseDate(DateUtil.getLastDayOfMonth(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 23:59:59", "yyyy-MM-dd HH:ss:mm");
+        process(userList, startDate, endDate);
+    }
+
     private void process(List<User> userList, Date startTime, Date endTime) {
         //根据指定时间查询
         for (User user : userList) {
