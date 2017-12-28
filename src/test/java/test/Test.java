@@ -72,7 +72,7 @@ public class Test {
 
     @org.junit.Test
     public void test3(){
-        System.out.println(stringEncryptor.encrypt("jdbc:mysql://60.205.229.68:1306/bill_test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8"));
+        System.out.println(stringEncryptor.encrypt("jdbc:mysql://60.205.229.68:3306/bill_test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8"));
         //System.out.println(stringEncryptor.decrypt("dQ6DsHsFvZtA0yIFHHzE7sQ/6mzewvDMre7V+TnH/iosHUyNoF1ClBm20/C96kgnJF+EZ3kOG/RCD3c4CxoEqIUlldpagn1ONCKjrjCNtlg4gGW6fP80A1WRiTT8uZ9JwC/emcobaHV+U1shEfrCDQ=="));
     }
 }
