@@ -112,7 +112,7 @@ public class ReportQueueProcess {
         helper.setTo(emailList.toArray(new String[emailList.size()]));
         helper.setSubject("消费明细");
         //html 加如参数 true
-        String text = "日期：" + DateUtil.dateFormat(billReportTask.getStartTime()) + "00:00-" + DateUtil.dateFormat(billReportTask.getEndTime()) + "23:59 累计消费：" + totalPrice / 100.0 + "元 列表如下：\n";
+        String text = "日期：" + DateUtil.dateFormat(billReportTask.getStartTime()) + " 00:00-" + DateUtil.dateFormat(billReportTask.getEndTime()) + " 23:59 累计消费：" + totalPrice / 100.0 + "元 列表如下：\n";
         text += "--------------------------------------------------账单明细----------------------------------------------------------------------------\n";
         Set<String> setC = Sets.newHashSet();
         for (int i = 0; i < billList.size(); i++) {
