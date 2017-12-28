@@ -37,7 +37,6 @@ public class BillReportCreateTask {
 
     @Scheduled(cron = "0 10 0 * * *")
     public void createDayTask() throws Exception {
-
         UserCriteria userCriteria = new UserCriteria();
         userCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode());
         List<User> userList = userService.search(userCriteria);
@@ -48,6 +47,12 @@ public class BillReportCreateTask {
         String date = DateUtil.getDayBeforeCurrentDate();
         Date startTime = DateUtil.parseDate(date + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
         Date endTime = DateUtil.parseDate(date + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
+        process(userList, startTime, endTime);
+
+
+    }
+
+    private void process(List<User> userList, Date startTime, Date endTime) {
         //根据指定时间查询
         for (User user : userList) {
             BillCriteria billCriteria = new BillCriteria();
@@ -64,8 +69,6 @@ public class BillReportCreateTask {
                 billReportTaskService.create(billReportTask);
             }
         }
-
-
     }
 
 }
