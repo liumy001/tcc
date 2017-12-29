@@ -73,7 +73,7 @@
             margin-left: 10px;
             width: 210px;
             overflow: hidden;
-            height: 60px;
+            height: 90px;
         }
 
         .game-info h1 {
@@ -120,6 +120,7 @@
                     <p>消费时间     ${key.consumTime?string("yyyy-MM-dd HH:mm:ss")}</p>
                     <p>金额         ${key.amount/100.0}</p>
                     <p>备注         ${key.remark}</p>
+                    <p>         ${key.remark}</p>
                 </div>
             </li>
         <#-- <button>下载</button>-->
@@ -157,7 +158,7 @@
             el = document.querySelector("#wrapper ul");
             for (i = 0; i < 2; i++) {
                 li = document.createElement('li');
-                li.innerHTML = "<img src='img/game8.png'><div class='game-info'><h1>华仔超神战记</h1><p>9万次下载     89.18M</p><p>秒杀虚拟摇杆，砸烂手机键盘</p></div><button>下载</button>"
+                li.innerHTML = ""
                 el.appendChild(li, el.childNodes[0]);
             }
             wrapper.refresh();
