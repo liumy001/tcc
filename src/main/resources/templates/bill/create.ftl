@@ -10,19 +10,26 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>form</title>
     <style>
-        a {text-decoration:none;}
-        a:link{
-            color:red;
+        a {
+            text-decoration: none;
         }
-        a:visited{
-            color:orange;
+
+        a:link {
+            color: red;
         }
-        a:hover{
-            color:green;
+
+        a:visited {
+            color: orange;
         }
-        a:active{
-            color:black;
+
+        a:hover {
+            color: green;
         }
+
+        a:active {
+            color: black;
+        }
+
         img {
             border: 0;
         }
@@ -211,7 +218,7 @@
 <body>
 
 <div class="pc-kk-form">
-    <a  style="display: block;margin-bottom: 10px;" href="${basePath}/index">返回首页</a>
+    <a style="display: block;margin-bottom: 10px;" href="${basePath}/index">返回首页</a>
     <form action="">
         <div class="pc-kk-form-list">
             <input type="text" id="billName" placeholder="请输入账单名称">
@@ -285,7 +292,7 @@
         </div>
     </form>
     <div class="pc-kk-form-btn">
-        <button  id="save" onclick="toSubmit()">保存</button>
+        <button id="save" onclick="toSubmit()">保存</button>
     </div>
 </div>
 
@@ -397,7 +404,7 @@
         var date = $("#dates").prop('relValue');
         var time = $("#time").prop('relValue');
         var remark = $("#remark").val();
-        console.log(billName+","+amount+","+bigCategory+","+smallCategory+","+date+","+time+","+remark)
+        console.log(billName + "," + amount + "," + bigCategory + "," + smallCategory + "," + date + "," + time + "," + remark)
         if (!billName) {
             alert('请输入账单名称')
             return
@@ -421,6 +428,9 @@
         if (!amount) {
             alert('请输入金额')
             return
+        }
+        if (remark && remark == '请输入备注内容') {
+            remark = '';
         }
         var reg = new RegExp(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/);
         if (!reg.test(amount)) {
