@@ -73,7 +73,7 @@
             margin-left: 10px;
             width: 210px;
             overflow: hidden;
-            height: 90px;
+            height: 70px;
         }
 
         .game-info h1 {
