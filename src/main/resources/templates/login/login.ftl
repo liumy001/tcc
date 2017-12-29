@@ -97,7 +97,13 @@
 <![endif]-->
 <script>
     $(function () {
-
+        var userInfo = getCookie("userInfo");
+        var cUserName=userInfo.split(":")[0];
+        var cPassword=userInfo.split(":")[1];
+        console.log("useriNFO=" + cUserName+","+cPassword);
+        if (cPassword && cUserName) {
+            login(cUserName, cPassword);
+        }
     });
 
     function toRegPage() {
@@ -107,6 +113,10 @@
     function toLogin() {
         var userName = $("#form-username").val();
         var password = $("#form-password").val();
+        login(userName, password)
+    }
+
+    function login(userName, password) {
         if (!userName) {
             alert('请输入用户名')
             return
@@ -129,7 +139,7 @@
             },
             success: function (req) {
                 if (req.status == 'ok') {
-                    window.location.href = "${basePath}/bill/toCreate"
+                    window.location.href = "${basePath}/index"
                     return
                 } else {
                     alert(req.message)
@@ -143,6 +153,14 @@
                 console.log("请求异常")
             }
         });
+    }
+
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
     }
 </script>
 </body>

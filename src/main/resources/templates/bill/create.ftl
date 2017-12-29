@@ -10,6 +10,19 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>form</title>
     <style>
+        a {text-decoration:none;}
+        a:link{
+            color:red;
+        }
+        a:visited{
+            color:orange;
+        }
+        a:hover{
+            color:green;
+        }
+        a:active{
+            color:black;
+        }
         img {
             border: 0;
         }
@@ -198,6 +211,7 @@
 <body>
 
 <div class="pc-kk-form">
+    <a  style="display: block;margin-bottom: 10px;" href="${basePath}/index">返回首页</a>
     <form action="">
         <div class="pc-kk-form-list">
             <input type="text" id="billName" placeholder="请输入账单名称">

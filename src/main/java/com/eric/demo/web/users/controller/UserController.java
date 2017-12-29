@@ -28,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
@@ -63,7 +66,8 @@ public class UserController {
 
     @RequestMapping("login")
     @ResponseBody
-    public ResponseVo login(HttpSession session, UserDto userDto) {
+    public ResponseVo login(HttpSession session, UserDto userDto, HttpServletResponse response, HttpServletRequest request) {
+        String soursePassWord=userDto.getPassword();
         //参数校验
         DataTransferObject dataTransferObject = paramCheckLogic.checkObjParamValidate(userDto);
         if (!SOAResParseUtil.checkDTO(dataTransferObject)) {
@@ -78,6 +82,14 @@ public class UserController {
             return ResponseVo.responseError("用户信息不存在");
         }
         session.setAttribute(BaseConst.USER_SESSION_KEY, userList.get(0));
+
+        Cookie cookie = new Cookie("userInfo", user.getUserName()+":"+soursePassWord);
+        //设置保存时间
+        cookie.setMaxAge(7 * 24 * 60 * 60);
+        //设置保存路径
+        cookie.setPath(request.getContextPath() + "/");
+        //添加到响应头
+        response.addCookie(cookie);
 
         return ResponseVo.responseOk(null);
     }
