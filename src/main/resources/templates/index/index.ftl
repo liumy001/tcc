@@ -19,9 +19,10 @@
         <div id="nav4_ul" class="nav_4">
             <ul class="box">
                 <li>
-                    <a href="javascript:;" class="on"><span>会员专区</span></a>
+                    <a href="javascript:;" class="off"><span>会员专区</span></a>
                     <dl>
                         <dd><a href="${basePath}/bill/toCreate"><span>创建账单</span></a></dd>
+                        <dd><a href="${basePath}/billReport/toDay"><span>七日内报表</span></a></dd>
                     </dl>
                 </li>
 
