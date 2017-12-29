@@ -47,7 +47,7 @@ public class BillReportCreateTask {
         String date = DateUtil.getDayBeforeCurrentDate();
         Date startTime = DateUtil.parseDate(date + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
         Date endTime = DateUtil.parseDate(date + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
-        process(userList, startTime, endTime);
+        process(userList, startTime, endTime, BaseConst.taskType.day.getCode());
 
 
     }
@@ -64,7 +64,7 @@ public class BillReportCreateTask {
         String date = DateUtil.getDayBeforeCurrentDate();
         Date startDate = DateUtil.parseDate(DateUtil.getFirstDayOfWeek(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 00:00:00", "yyyy-MM-dd HH:ss:mm");
         Date endDate = DateUtil.parseDate(DateUtil.getLastDayOfWeek(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 23:59:59", "yyyy-MM-dd HH:ss:mm");
-        process(userList, startDate, endDate);
+        process(userList, startDate, endDate, BaseConst.taskType.week.getCode());
     }
 
     @Scheduled(cron = " 0 15 2 1 * ?")
@@ -79,10 +79,10 @@ public class BillReportCreateTask {
         String date = DateUtil.getDayBeforeCurrentDate();
         Date startDate = DateUtil.parseDate(DateUtil.getFirstDayOfMonth(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 00:00:00", "yyyy-MM-dd HH:ss:mm");
         Date endDate = DateUtil.parseDate(DateUtil.getLastDayOfMonth(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 23:59:59", "yyyy-MM-dd HH:ss:mm");
-        process(userList, startDate, endDate);
+        process(userList, startDate, endDate, BaseConst.taskType.mounth.getCode());
     }
 
-    private void process(List<User> userList, Date startTime, Date endTime) {
+    private void process(List<User> userList, Date startTime, Date endTime, int type) {
         //根据指定时间查询
         for (User user : userList) {
             BillCriteria billCriteria = new BillCriteria();
@@ -96,6 +96,7 @@ public class BillReportCreateTask {
                 billReportTask.setSendStatus(0);
                 billReportTask.setTotalAmount(0);
                 billReportTask.setUid(user.getId());
+                billReportTask.setType(type);
                 billReportTaskService.create(billReportTask);
             }
         }

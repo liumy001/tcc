@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @数表名称 t_bill_report_task
- * @开发日期 2017-12-22 15:52:47
+ * @开发日期 2017-12-29 12:49:39
  * @开发作者 by:liumy 
  */
 public class BillReportTask extends AbstractAuditingEntity implements Serializable {
@@ -17,6 +17,8 @@ public class BillReportTask extends AbstractAuditingEntity implements Serializab
     private Date startTime;
 
     private Date endTime;
+
+    private Integer type;
 
     private Integer sendStatus;
 
@@ -66,6 +68,14 @@ public class BillReportTask extends AbstractAuditingEntity implements Serializab
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getSendStatus() {
@@ -142,6 +152,7 @@ public class BillReportTask extends AbstractAuditingEntity implements Serializab
         sb.append(", uid=").append(uid);
         sb.append(", startTime=").append(startTime);
         sb.append(", endTime=").append(endTime);
+        sb.append(", type=").append(type);
         sb.append(", sendStatus=").append(sendStatus);
         sb.append(", status=").append(status);
         sb.append(", totalAmount=").append(totalAmount);
@@ -171,6 +182,7 @@ public class BillReportTask extends AbstractAuditingEntity implements Serializab
             && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
             && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
             && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getSendStatus() == null ? other.getSendStatus() == null : this.getSendStatus().equals(other.getSendStatus()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getTotalAmount() == null ? other.getTotalAmount() == null : this.getTotalAmount().equals(other.getTotalAmount()))
@@ -189,6 +201,7 @@ public class BillReportTask extends AbstractAuditingEntity implements Serializab
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
         result = prime * result + ((getEndTime() == null) ? 0 : getEndTime().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getSendStatus() == null) ? 0 : getSendStatus().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getTotalAmount() == null) ? 0 : getTotalAmount().hashCode());

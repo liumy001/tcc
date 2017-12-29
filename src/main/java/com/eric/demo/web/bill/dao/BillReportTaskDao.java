@@ -9,7 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 
 /**
  * @数表名称 t_bill_report_task
- * @开发日期 2017-12-22 15:52:47
+ * @开发日期 2017-12-29 12:49:39
  * @开发作者 by:liumy 
  */
 public interface BillReportTaskDao extends BaseDao<BillReportTask, BillReportTaskCriteria, String> {

@@ -98,4 +98,37 @@ public abstract class BaseConst {
             return this;
         }
     }
+
+    public enum taskType {
+        day(1, "日账单"),
+        week(2, "周账单"),
+        mounth(3, "月账单"),
+        year(4, "年账单");
+        private int code;
+        private String name;
+
+        taskType(int code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public taskType setCode(int code) {
+            this.code = code;
+            return this;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public taskType setName(String name) {
+            this.name = name;
+            return this;
+        }
+    }
+
 }
