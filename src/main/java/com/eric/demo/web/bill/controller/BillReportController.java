@@ -50,7 +50,6 @@ public class BillReportController {
         List<BillReportTask> billReportTaskList = billReportTaskService.search(billReportTaskCriteria);
         TaskReportDto taskReportDto = new TaskReportDto();
         taskReportDto.setX(xList);
-        xList.add(DateUtil.checkOption("next",xList.get(xList.size()-1)));
         double max = 0.0;
         for (String day : xList) {
             String d = DateUtil.checkOption("next", day);
