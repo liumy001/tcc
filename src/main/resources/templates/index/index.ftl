@@ -23,6 +23,7 @@
                     <dl>
                         <dd><a href="${basePath}/bill/toCreate"><span>创建账单</span></a></dd>
                         <dd><a href="${basePath}/billReport/toDay"><span>七日内报表</span></a></dd>
+                        <dd><a href="${basePath}/bill/toList"><span>账单列表</span></a></dd>
                     </dl>
                 </li>
 

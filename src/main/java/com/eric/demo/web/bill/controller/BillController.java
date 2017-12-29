@@ -8,12 +8,15 @@ import com.eric.demo.commons.validator.BaseConst;
 import com.eric.demo.commons.validator.DataTransferObject;
 import com.eric.demo.commons.validator.ParamCheckLogic;
 import com.eric.demo.web.bill.domain.Bill;
+import com.eric.demo.web.bill.domain.BillCriteria;
 import com.eric.demo.web.bill.dto.BillSaveDto;
 import com.eric.demo.web.bill.service.IBillService;
 import com.eric.demo.web.category.domain.Category;
 import com.eric.demo.web.category.domain.CategoryCriteria;
 import com.eric.demo.web.category.service.ICategoryService;
 import com.eric.demo.web.users.domain.User;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -41,6 +44,27 @@ public class BillController {
 
     @Autowired
     private ICategoryService categoryService;
+
+
+    @RequestMapping(value = "toList")
+    public String toList(Model model, HttpSession session) {
+        User user = (User) session.getAttribute(BaseConst.USER_SESSION_KEY);
+        if (Check.NuNObj(user)) {
+            model.addAttribute("message", "登录超时");
+            return "error/error";
+        }
+        BillCriteria billCriteria = new BillCriteria();
+        billCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode()).andUidEqualTo(user.getId());
+        billCriteria.setDistinct(false);
+        billCriteria.setOrderByClause("consum_time");
+
+        Page<Bill> page = PageHelper.startPage(1, 1000);
+        billService.search(billCriteria);
+
+        model.addAttribute("data", page.getResult());
+
+        return "bill/list";
+    }
 
     @RequestMapping(value = "create")
     @CommonLog
