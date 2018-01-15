@@ -55,7 +55,7 @@ public class BillController {
         }
         BillCriteria billCriteria = new BillCriteria();
         billCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode()).andUidEqualTo(user.getId());
-        billCriteria.setDistinct(false);
+        billCriteria.setDistinct(true);
         billCriteria.setOrderByClause("consum_time");
 
         Page<Bill> page = PageHelper.startPage(1, 1000);
