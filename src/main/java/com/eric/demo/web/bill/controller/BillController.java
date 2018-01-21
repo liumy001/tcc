@@ -57,7 +57,8 @@ public class BillController {
         billCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode()).andUidEqualTo(user.getId());
         billCriteria.setDistinct(true);
         billCriteria.setOrderByClause("consum_time desc");
-        Page<Bill> page = PageHelper.startPage(1, 1000);
+        //查询最新的100条记录
+        Page<Bill> page = PageHelper.startPage(1, 100);
         billService.search(billCriteria);
 
         model.addAttribute("data", page.getResult());

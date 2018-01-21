@@ -52,7 +52,7 @@ public class BillReportCreateTask {
 
     }
 
-    @Scheduled(cron = "0 15 1 ? * MON")
+    @Scheduled(cron = "0 15 10 ? * MON")
     public void createWeekDayTask() throws Exception {
         UserCriteria userCriteria = new UserCriteria();
         userCriteria.or().andIsDelEqualTo(BaseConst.isDel.no_Del.getCode());
@@ -62,8 +62,8 @@ public class BillReportCreateTask {
             return;
         }
         String date = DateUtil.getDayBeforeCurrentDate();
-        Date startDate = DateUtil.parseDate(DateUtil.getFirstDayOfWeek(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 00:00:00", "yyyy-MM-dd HH:ss:mm");
-        Date endDate = DateUtil.parseDate(DateUtil.getLastDayOfWeek(DateUtil.parseDate(date, "yyyy-MM-dd")) + " 23:59:59", "yyyy-MM-dd HH:ss:mm");
+        Date startDate = DateUtil.parseDate(DateUtil.convertWeekByDate(DateUtil.parseDate(date, "yyyy-MM-dd")).get("first") + " 00:00:00", "yyyy-MM-dd HH:ss:mm");
+        Date endDate = DateUtil.parseDate(DateUtil.convertWeekByDate(DateUtil.parseDate(date, "yyyy-MM-dd")).get("last") + " 23:59:59", "yyyy-MM-dd HH:ss:mm");
         process(userList, startDate, endDate, BaseConst.taskType.week.getCode());
     }
 
