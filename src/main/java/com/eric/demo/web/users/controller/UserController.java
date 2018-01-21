@@ -67,7 +67,11 @@ public class UserController {
     @RequestMapping("login")
     @ResponseBody
     public ResponseVo login(HttpSession session, UserDto userDto, HttpServletResponse response, HttpServletRequest request) {
-        String soursePassWord=userDto.getPassword();
+        Object userObj = session.getAttribute(BaseConst.USER_SESSION_KEY);
+        if (!Check.NuNObj(userObj)) {
+            return ResponseVo.responseOk(null);
+        }
+        String soursePassWord = userDto.getPassword();
         //参数校验
         DataTransferObject dataTransferObject = paramCheckLogic.checkObjParamValidate(userDto);
         if (!SOAResParseUtil.checkDTO(dataTransferObject)) {
@@ -82,15 +86,23 @@ public class UserController {
             return ResponseVo.responseError("用户信息不存在");
         }
         session.setAttribute(BaseConst.USER_SESSION_KEY, userList.get(0));
-
-        Cookie cookie = new Cookie("userInfo", user.getUserName()+":"+soursePassWord);
-        //设置保存时间
-        cookie.setMaxAge(7 * 24 * 60 * 60);
-        //设置保存路径
-        cookie.setPath(request.getContextPath() + "/");
-        //添加到响应头
-        response.addCookie(cookie);
-
+        //获取用户cookie
+        Object value = null;
+        for (Cookie cookie : request.getCookies()) {
+            if ("userInfo".equals(cookie.getName())) {
+                value = cookie.getValue();
+                break;
+            }
+        }
+        if (Check.NuNObj(value)) {
+            Cookie cookie = new Cookie("userInfo", user.getUserName() + ":" + soursePassWord);
+            //设置保存时间
+            cookie.setMaxAge(7 * 24 * 60 * 60);
+            //设置保存路径
+            cookie.setPath(request.getContextPath() + "/");
+            //添加到响应头
+            response.addCookie(cookie);
+        }
         return ResponseVo.responseOk(null);
     }
 
