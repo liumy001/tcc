@@ -34,7 +34,6 @@ public class AutoSetterAspect {
                         processSave(arg);
                     } catch (Exception e) {
                     }
-
                 }
                 //更新时间自动注入
                 if (targetMethod.getName().startsWith("update") || targetMethod.getName().startsWith("logicDeleteById")) {
